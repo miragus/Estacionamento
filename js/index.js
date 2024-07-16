@@ -111,12 +111,12 @@
     }
 
     function getGarage() {
-        const garage = JSON.parse(window.electronAPI.getFromLocalStorage('garage')) || [];
+        const garage = JSON.parse(localStorage.getItem('garage')) || [];
         return garage;
     }
 
     function saveToLocalStorage(key, value) {
-        window.electronAPI.saveToLocalStorage(key, value);
+        localStorage.setItem(key, value);
     }
 
     renderGarage();
