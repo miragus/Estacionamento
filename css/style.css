@@ -1,0 +1,120 @@
+/* style.css */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #1E1E1E; /* Dark background similar to Electron theme */
+    color: #CCCCCC; /* Light text color for contrast */
+    margin: 0;
+    padding: 20px;
+    display: flex;  
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+
+}
+
+#station{
+    position: relative;
+    bottom: 70px;
+}
+
+
+#container {
+    position: relative;
+    bottom: 70px;
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: #282828; /* Slightly lighter dark color for the container */
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
+}
+
+input[type="text"],
+input[type="time"] {
+    width: calc(100% - 20px);
+    padding: 10px;
+    margin-bottom: 10px;
+    border: none;
+    border-radius: 4px;
+    background-color: #3C3C3C; /* Dark input background */
+    color: #CCCCCC; /* Light text color */
+}
+
+button {
+    width: 100%;
+    padding: 10px;
+    border: none;
+    border-radius: 4px;
+    background-color: #8FD3E0; /* Electron blue color */
+    color: white;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+button:hover {
+    background-color: #8FD3E0; /* Darker blue on hover */
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+}
+
+th,
+td {
+    padding: 10px;
+    text-align: left;
+    border-bottom: 1px solid #3C3C3C; /* Border color matching the input background */
+}
+
+th {
+    background-color: #333333; /* Darker background for headers */
+    color: #CCCCCC;
+}
+
+td input[type="time"] {
+    width: auto;
+    padding: 5px;
+    margin: 0;
+}
+
+.delete {
+    background-color: #8FD3E0; /* Red delete button */
+    color: white;
+    border: none;
+    padding: 5px 10px;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.delete:hover {
+    background-color: #8FD3E0; /* Darker red on hover */
+}
+
+
+
+.custom-alert {
+    display: none;
+    position: fixed;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    background-color: #3C3C3C;
+    padding: 20px;
+    border: 2px solid black;
+    z-index: 1000;
+}
+
+.custom-alert p {
+    margin: 0;
+    color: #CCCCCC;
+    padding: 10px 0;
+}
+
+.custom-alert button {
+    padding: 5px 10px;
+}
+

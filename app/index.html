@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../css/style.css">
+    <title>Estacionamento</title>
+</head>
+<body>
+
+    <figure class="Station">
+        <img id="station" src="../img/77Station.png" alt="logo-77station">
+    </figure>
+
+
+    <div id="container">
+        <input type="text" id="name" placeholder="Digite o nome do veículo" autocomplete="off">
+        <input type="text" id="licence" placeholder="Digite a placa do veículo" autocomplete="off">
+        <input type="time" id="time" placeholder="Horário de entrada">
+        <button id="send">Registrar</button>
+
+        <table>
+            <thead>
+                <tr>
+                    <th>Vaga</th> <!-- Nova coluna para mostrar o número da vaga -->
+                    <th>Veículo</th>
+                    <th>Placa</th>
+                    <th>Horário de Entrada</th>
+                    <th>Horário de Saída</th>
+                    <th>Ações</th>
+                </tr>
+            </thead>
+            <tbody id="garage"></tbody>
+        </table>
+    </div>
+
+    <div id="result" class="result"></div>
+    <div id="custom-alert" class="custom-alert">
+        <p id="alert-message"></p>
+        <button id="alert-ok">OK</button>
+    </div>
+
+    <script src="../js/index.js"></script>
+    <script src="../main.js"></script>
+    <script src="../preload.js"></script>
+</body>
+</html>
