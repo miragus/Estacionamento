@@ -20,12 +20,13 @@
         <div id="container">
             <input type="text" id="name" placeholder="Digite o nome do veículo" autocomplete="off">
             <input type="text" id="licence" placeholder="Digite a placa do veículo" autocomplete="off">
-            <select id="vehicle-type">
-                <option value="">Selecione o tipo de veículo</option>
+                <select id="vehicle-type">
+                <option value="" disabled selected hidden>Selecione o tipo de veículo</option>
                 <option value="Carro">Carro</option>
                 <option value="Moto">Moto</option>
                 <option value="Caminhão">Caminhão</option>
             </select>
+            
             <input type="time" id="time" placeholder="Horário de entrada">
             <button id="send">Registrar</button>
 
