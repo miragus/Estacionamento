@@ -7,38 +7,70 @@
     <title>Estacionamento</title>
 </head>
 <body>
+    <div class="header">
+        <p>Atendimento 24H no WhatsApp: (xx) xxxxx-xxxx</p>
+        <img class="zap" src="../img/whatsapp_icon-icons.webp" alt="">
+    </div>
 
     <figure class="Station">
-        <img id="station" src="../img/77Station.png" alt="logo-77station">
+        <img id="station" src="../img/77Station__3_-removebg-preview.png" alt="logo-77station">
     </figure>
 
+    <div class="row">
+        <div id="container">
+            <input type="text" id="name" placeholder="Digite o nome do veículo" autocomplete="off">
+            <input type="text" id="licence" placeholder="Digite a placa do veículo" autocomplete="off">
+            <select id="vehicle-type">
+                <option value="">Selecione o tipo de veículo</option>
+                <option value="Carro">Carro</option>
+                <option value="Moto">Moto</option>
+                <option value="Caminhão">Caminhão</option>
+            </select>
+            <input type="time" id="time" placeholder="Horário de entrada">
+            <button id="send">Registrar</button>
 
-    <div id="container">
-        <input type="text" id="name" placeholder="Digite o nome do veículo" autocomplete="off">
-        <input type="text" id="licence" placeholder="Digite a placa do veículo" autocomplete="off">
-        <input type="time" id="time" placeholder="Horário de entrada">
-        <button id="send">Registrar</button>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Vaga</th>
+                    </tr>
+                </thead>
+                <tbody id="garage"></tbody>
+            </table>
+        </div>
 
-        <table>
-            <thead>
-                <tr>
-                    <th>Vaga</th> <!-- Nova coluna para mostrar o número da vaga -->
-                    <th>Veículo</th>
-                    <th>Placa</th>
-                    <th>Horário de Entrada</th>
-                    <th>Horário de Saída</th>
-                    <th>Ações</th>
-                </tr>
-            </thead>
-            <tbody id="garage"></tbody>
-        </table>
+        <div class="resultado">
+            <div id="result" class="result"></div>
+            <div id="custom-alert" class="custom-alert">
+                <p id="alert-message"></p>
+                <button id="alert-ok">OK</button>
+            </div>
+        </div>
     </div>
 
-    <div id="result" class="result"></div>
-    <div id="custom-alert" class="custom-alert">
-        <p id="alert-message"></p>
-        <button id="alert-ok">OK</button>
-    </div>
+    <footer>
+        <div class="footer-content">
+            <div class="plans">
+                <h3>Planos Disponíveis</h3>
+                <ul>
+                    <li>Plano Básico - R$ 50/mês</li>
+                    <li>Plano Intermediário - R$ 100/mês</li>
+                    <li>Plano Premium - R$ 200/mês</li>
+                </ul>
+            </div>
+            <div class="contact">
+                <h3>Contato</h3>
+                <p>Email: suporte@77station.com.br</p>
+                <p>Telefone: (xx) xxxxx-xxxx</p>
+                <p>WhatsApp: (xx) xxxxx-xxxx</p>
+            </div>
+            <div class="info">
+                <h3>Informações</h3>
+                <p>Para mais informações sobre o sistema, acesse nosso <a href="#">site</a>.</p>
+                <p>Visite nossa <a href="#">página de FAQ</a> para dúvidas frequentes.</p>
+            </div>
+        </div>
+    </footer>
 
     <script src="../js/index.js"></script>
     <script src="../preload.js"></script>

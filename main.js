@@ -5,7 +5,7 @@ let mainWindow = null;
 
 function createWindow() {
     mainWindow = new BrowserWindow({
-        width: 1000,
+        width: 1440,
         height: 900,
         resizable: false,
         icon: 'img/transport.ico',

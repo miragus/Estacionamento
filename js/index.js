@@ -48,47 +48,77 @@
 
         // Preencher vagas disponíveis até 10
         for (let i = vaga; i <= 10; i++) {
-            const emptyCar = { name: '', licence: '', time: '' };
-            addCarToGarage(emptyCar, garageTable, i);
+            addCarToGarage(null, garageTable, i);
         }
     }
 
     function addCarToGarage(car, table, vaga) {
         const row = document.createElement("tr");
+        const cell = document.createElement("td");
 
-        row.innerHTML = `
-            <td>${vaga}</td>
-            <td>${car.name}</td>
-            <td>${car.licence}</td>
-            <td>${car.time}</td>
-            <td><input type="time" class="exit-time" data-licence="${car.licence}"></td>
-            <td>
+        if (car) {
+            cell.innerHTML = `
+                <div class="vaga-ocupada">Vaga Ocupada</div>
+                <input type="time" class="exit-time" data-licence="${car.licence}">
+                <button class="details-btn">Detalhes</button>
+                <button class="edit">Editar</button>
                 <button class="delete">X</button>
-            </td>
-        `;
+            `;
+        } else {
+            cell.innerHTML = `
+                <div class="vaga-disponivel">Vaga Disponível</div>
+            `;
+        }
+
+        row.appendChild(cell);
         table.appendChild(row);
 
-        // Adiciona o evento de clique no botão de delete
-        row.querySelector('.delete').addEventListener('click', () => {
-            const carInfo = {
-                name: car.name,
-                licence: car.licence,
-                time: car.time
-            };
-            checkOut(carInfo);
-        });
+        if (car) {
+            const detailsBtn = row.querySelector('.details-btn');
+            let detailsRow;
+
+            // Adiciona o evento de clique no botão de detalhes
+            detailsBtn.addEventListener('click', () => {
+                if (detailsRow) {
+                    // Remove a linha de detalhes se já existir
+                    detailsRow.remove();
+                    detailsRow = null;
+                } else {
+                    // Adiciona a linha de detalhes
+                    detailsRow = document.createElement("tr");
+                    detailsRow.innerHTML = `
+                        <td colspan="1" class="details-row">
+                            <div class="result-item">
+                                <p>Veículo: ${car.name}</p>
+                                <p>Placa: ${car.licence}</p>
+                                <p>Tipo: ${car.type}</p>
+                                <p>Horário de Entrada: ${car.time}</p>
+                            </div>
+                        </td>
+                    `;
+                    row.after(detailsRow);
+                }
+            });
+
+            // Adiciona o evento de clique no botão de delete
+            row.querySelector('.delete').addEventListener('click', () => {
+                const carInfo = {
+                    name: car.name,
+                    licence: car.licence,
+                    type: car.type,
+                    time: car.time
+                };
+                checkOut(carInfo);
+            });
+
+            // Adiciona o evento de clique no botão de editar
+            row.querySelector('.edit').addEventListener('click', () => {
+                editCar(car);
+            });
+        }
     }
 
-    function showResult(info, period) {
-        const resultDiv = $("#result");
-        resultDiv.innerHTML = `
-            <p>Veículo: ${info.name}</p>
-            <p>Placa: ${info.licence}</p>
-            <p>Horário de Entrada: ${info.time}</p>
-            <p>Horário de Saída: ${info.exitTime}</p>
-            <p>Tarifa: R$${period}</p>
-        `;
-    }
+    
 
     function checkOut(info) {
         const exitTimeInput = $(`.exit-time[data-licence="${info.licence}"]`);
@@ -102,8 +132,31 @@
         const period = convertPeriod(info.time, exitTime);
         info.exitTime = exitTime;
 
-        showResult(info, period);
+        const resultDiv = $("#result");
+        resultDiv.innerHTML = `
+            <div class="result-item">
+                <p>Veículo: ${info.name}</p>
+                <p>Placa: ${info.licence}</p>
+                <p>Tipo: ${info.type}</p>
+                <p>Horário de Entrada: ${info.time}</p>
+                <p>Horário de Saída: ${info.exitTime}</p>
+                <p>Tarifa: R$${period}</p>
+            </div>
+        `;
 
+        const garage = getGarage().filter(c => c.licence !== info.licence);
+        saveToLocalStorage('garage', JSON.stringify(garage));
+
+        renderGarage();
+    }
+
+    function editCar(info) {
+        $("#name").value = info.name;
+        $("#licence").value = info.licence;
+        $("#vehicle-type").value = info.type;
+        $("#time").value = info.time;
+
+        // Remove o carro original da garagem
         const garage = getGarage().filter(c => c.licence !== info.licence);
         saveToLocalStorage('garage', JSON.stringify(garage));
 
@@ -124,10 +177,11 @@
     $("#send").addEventListener("click", () => {
         const name = $("#name").value;
         const licence = $("#licence").value;
+        const type = $("#vehicle-type").value;
         const timeInput = $("#time").value;
 
-        if (!name || !licence || !timeInput) {
-            showAlert("Os campos são obrigatórios.");
+        if (!name || !licence || !type || !timeInput) {
+            showAlert("Todos os campos são obrigatórios.");
             return;
         }
 
@@ -139,7 +193,7 @@
             return;
         }
 
-        const car = { name, licence, time: timeInput };
+        const car = { name, licence, type, time: timeInput };
 
         garage.push(car);
 
@@ -149,6 +203,7 @@
 
         $("#name").value = "";
         $("#licence").value = "";
+        $("#vehicle-type").value = "";
         $("#time").value = "";
     });
 

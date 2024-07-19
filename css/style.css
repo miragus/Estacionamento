@@ -1,43 +1,87 @@
-/* style.css */
 body {
     font-family: Arial, sans-serif;
     background-color: #1E1E1E; /* Dark background similar to Electron theme */
     color: #CCCCCC; /* Light text color for contrast */
     margin: 0;
-    padding: 20px;
-    display: flex;  
+    padding: 0; /* Remove default padding */
+    display: flex;
     justify-content: center;
-    flex-direction: column;
     align-items: center;
+    flex-direction: column; /* Align items vertically */
+    min-height: 100vh; /* Ensure full height */
+}
+
+.header {
+    width: 100%;
+    background-color: #333; /* Dark background for the header */
+    color: #CCCCCC;
+    text-align: center;
+    padding: 10px;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 1000;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+}
+
+.header p {
+    margin: 0;
+}
+
+.zap{
+    width: 20px;
+    padding-left: 5px;
 
 }
 
-#station{
-    position: relative;
-    bottom: 70px;
+.row {
+    display: flex;
+    justify-content: center;
+    gap: 20px; /* Space between container and result box */
+    width: 100%;
+    margin-top: 60px; /* Space for fixed header */
 }
-
 
 #container {
-    position: relative;
-    bottom: 70px;
-    max-width: 600px;
-    margin: 0 auto;
+    max-width: 800px; /* Increased width for better table display */
+    width: 100%; /* Ensure it uses full width on smaller screens */
     padding: 20px;
     background-color: #282828; /* Slightly lighter dark color for the container */
     border-radius: 8px;
     box-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
+    position: relative;
+    bottom: 100px;
+}
+
+.resultado {
+    max-width: 400px; /* Define a maximum width for the result box */
+    width: 100%;
+    height: 200px;
+    padding: 20px;
+    background-color: #444; /* Background color for the result box */
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
+    color: #FFFFFF;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: relative;
+    bottom: 100px;
 }
 
 input[type="text"],
-input[type="time"] {
+input[type="time"],
+#vehicle-type {
     width: calc(100% - 20px);
     padding: 10px;
     margin-bottom: 10px;
     border: none;
     border-radius: 4px;
-    background-color: #3C3C3C; /* Dark input background */
-    color: #CCCCCC; /* Light text color */
+    background-color: #3C3C3C;
+    color: #CCCCCC;
 }
 
 button {
@@ -53,19 +97,22 @@ button {
 }
 
 button:hover {
-    background-color: #8FD3E0; /* Darker blue on hover */
+    background-color: #74B9D8; /* Slightly darker blue on hover */
 }
 
 table {
     width: 100%;
     border-collapse: collapse;
     margin-top: 20px;
+    background-color: #2C2C2C; /* Background for the table */
+    border-radius: 8px;
+    overflow: hidden; /* Ensure border radius is applied */
 }
 
 th,
 td {
     padding: 10px;
-    text-align: left;
+    text-align: center;
     border-bottom: 1px solid #3C3C3C; /* Border color matching the input background */
 }
 
@@ -74,15 +121,38 @@ th {
     color: #CCCCCC;
 }
 
+td {
+    color: #FFFFFF;
+}
+
 td input[type="time"] {
     width: auto;
     padding: 5px;
-    margin: 0;
+    position: relative;
+    left: 340px;
+    margin: 10px;
+    display: block; /* Center the input field */
+}
+
+.details-btn {
+    background-color: #8FD3E0; /* Blue details button */
+    color: white;
+    width: 20%;
+    border: none;
+    padding: 5px 10px;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.details-btn:hover {
+    background-color: #74B9D8; /* Darker blue on hover */
 }
 
 .delete {
-    background-color: #8FD3E0; /* Red delete button */
+    background-color: #FF6347; /* Red delete button */
     color: white;
+    width: 20%;
     border: none;
     padding: 5px 10px;
     border-radius: 4px;
@@ -91,10 +161,23 @@ td input[type="time"] {
 }
 
 .delete:hover {
-    background-color: #8FD3E0; /* Darker red on hover */
+    background-color: #FF4500; /* Darker red on hover */
 }
 
+.edit {
+    background-color: #8FD3E0; /* Blue edit button */
+    color: white;
+    width: 20%;
+    border: none;
+    padding: 5px 10px;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
 
+.edit:hover {
+    background-color: #74B9D8; /* Darker blue on hover */
+}
 
 .custom-alert {
     display: none;
@@ -106,6 +189,7 @@ td input[type="time"] {
     padding: 20px;
     border: 2px solid black;
     z-index: 1000;
+    border-radius: 8px;
 }
 
 .custom-alert p {
@@ -116,5 +200,103 @@ td input[type="time"] {
 
 .custom-alert button {
     padding: 5px 10px;
+    background-color: #8FD3E0;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
 }
 
+.custom-alert button:hover {
+    background-color: #74B9D8;
+}
+
+.vaga-disponivel {
+    color: #28A745; /* Green for available */
+}
+
+.vaga-ocupada {
+    color: #DC3545; /* Red for occupied */
+}
+
+.result-item {
+    margin-bottom: 10px;
+    padding: 10px;
+    background-color: #3C3C3C; /* Background color for each item */
+    border-radius: 4px;
+}
+
+.result-item p {
+    margin: 0;
+    padding: 5px 0;
+    border-bottom: 1px solid #444; /* Border for separation */
+}
+
+.result-item p:last-child {
+    border-bottom: none; /* Remove border from last item */
+}
+
+.details-row {
+    background-color: #3C3C3C; /* Background color for details row */
+    color: #FFFFFF; /* Text color */
+}
+
+.details-row .result-item {
+    padding: 10px;
+    border: none; /* Remove border */
+}
+
+.details-row .result-item p {
+    padding: 10px 0;
+    border: 1px solid rgba(0, 0, 0, 0.5);
+}
+
+/* Estilo para o rodapé */
+footer {
+    background-color: #282828; /* Cor de fundo do rodapé */
+    color: #CCCCCC; /* Cor do texto */
+    padding: 20px;
+    text-align: center;
+    width: 100%;
+    position: relative;
+    bottom: 0;
+}
+
+.footer-content {
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.footer-content div {
+    flex: 1;
+    margin: 10px;
+}
+
+.footer-content h3 {
+    margin-bottom: 10px;
+}
+
+.footer-content p, .footer-content ul {
+    margin: 5px 0;
+}
+
+.footer-content ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+.footer-content ul li {
+    margin-bottom: 5px;
+}
+
+.footer-content a {
+    color: #8FD3E0;
+    text-decoration: none;
+}
+
+.footer-content a:hover {
+    text-decoration: underline;
+}
