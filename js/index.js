@@ -92,7 +92,7 @@
                                 <p>Veículo: ${car.name}</p>
                                 <p>Placa: ${car.licence}</p>
                                 <p>Tipo: ${car.type}</p>
-                                <p>Horário de Entrada: ${car.time}</p>
+                                <p>Entrada: ${car.time}</p>
                             </div>
                         </td>
                     `;
@@ -138,8 +138,8 @@
                 <p>Veículo: ${info.name}</p>
                 <p>Placa: ${info.licence}</p>
                 <p>Tipo: ${info.type}</p>
-                <p>Horário de Entrada: ${info.time}</p>
-                <p>Horário de Saída: ${info.exitTime}</p>
+                <p>Entrada: ${info.time}</p>
+                <p>Saída: ${info.exitTime}</p>
                 <p>Tarifa: R$${period}</p>
             </div>
         `;

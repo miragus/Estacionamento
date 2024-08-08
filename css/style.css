@@ -1,6 +1,6 @@
 body {
     font-family: Arial, sans-serif;
-    background-color: #1E1E1E; /* Dark background similar to Electron theme */
+    background-color: #000000; /* Dark background similar to Electron theme */
     color: #CCCCCC; /* Light text color for contrast */
     margin: 0;
     padding: 0; /* Remove default padding */
@@ -27,6 +27,28 @@ body {
     align-items: center;
 }
 
+#station{
+    width: 500px;
+    position: relative;
+    bottom: 50px;
+}
+
+.links{
+    display: flex;
+    flex-direction: row;
+    position: relative;
+    bottom: 100px;
+    width: 300px;
+    justify-content: space-between;
+    padding: 10px;
+}
+
+.link{
+    text-decoration: none;
+    color: #E96379;
+    font-weight: bold;
+}
+
 .header p {
     margin: 0;
 }
@@ -46,7 +68,7 @@ body {
 }
 
 #container {
-    max-width: 800px; /* Increased width for better table display */
+    max-width: 300px; /* Increased width for better table display */
     width: 100%; /* Ensure it uses full width on smaller screens */
     padding: 20px;
     background-color: #282828; /* Slightly lighter dark color for the container */
@@ -73,9 +95,19 @@ body {
 }
 
 input[type="text"],
-input[type="time"],
-#vehicle-type {
+input[type="number"],
+input[type="time"]
+{
     width: calc(100% - 20px);
+    padding: 10px;
+    margin-bottom: 10px;
+    border: none;
+    border-radius: 4px;
+    background-color: #3C3C3C;
+    color: #CCCCCC;
+}
+#vehicle-type {
+    width: calc(100%);
     padding: 10px;
     margin-bottom: 10px;
     border: none;
@@ -89,7 +121,7 @@ button {
     padding: 10px;
     border: none;
     border-radius: 4px;
-    background-color: #8FD3E0; /* Electron blue color */
+    background-color: #FF3131; /* Electron blue color */
     color: white;
     font-weight: bold;
     cursor: pointer;
@@ -97,7 +129,7 @@ button {
 }
 
 button:hover {
-    background-color: #74B9D8; /* Slightly darker blue on hover */
+    background-color: #FF3131; /* Slightly darker blue on hover */
 }
 
 table {
@@ -135,7 +167,7 @@ td input[type="time"] {
 }
 
 .details-btn {
-    background-color: #8FD3E0; /* Blue details button */
+    background-color: #FF3131; /* Blue details button */
     color: white;
     width: 20%;
     border: none;
@@ -146,7 +178,7 @@ td input[type="time"] {
 }
 
 .details-btn:hover {
-    background-color: #74B9D8; /* Darker blue on hover */
+    background-color: #FF3131; /* Darker blue on hover */
 }
 
 .delete {
@@ -165,7 +197,7 @@ td input[type="time"] {
 }
 
 .edit {
-    background-color: #8FD3E0; /* Blue edit button */
+    background-color: #FF3131; /* Blue edit button */
     color: white;
     width: 20%;
     border: none;
@@ -176,7 +208,7 @@ td input[type="time"] {
 }
 
 .edit:hover {
-    background-color: #74B9D8; /* Darker blue on hover */
+    background-color: #FF3131; /* Darker blue on hover */
 }
 
 .custom-alert {
@@ -200,7 +232,7 @@ td input[type="time"] {
 
 .custom-alert button {
     padding: 5px 10px;
-    background-color: #8FD3E0;
+    background-color: #FF3131;
     color: white;
     border: none;
     border-radius: 4px;
@@ -208,11 +240,11 @@ td input[type="time"] {
 }
 
 .custom-alert button:hover {
-    background-color: #74B9D8;
+    background-color: #FF3131;
 }
 
 .vaga-disponivel {
-    color: #28A745; /* Green for available */
+    color: #4ea58f; /* Green for available */
 }
 
 .vaga-ocupada {

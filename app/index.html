@@ -8,18 +8,30 @@
 </head>
 <body>
     <div class="header">
-        <p>Atendimento 24H no WhatsApp: (xx) xxxxx-xxxx</p>
-        <img class="zap" src="../img/whatsapp_icon-icons.webp" alt="">
-    </div>
+        
+            <p>Atendimento 24H no WhatsApp: (xx) xxxxx-xxxx</p>
+            <img class="zap" src="../img/whatsapp_icon-icons.webp" alt="">
+        </div>
+    
+        <figure class="Station">
+            <img id="station" src="../img/STAYTION.png" alt="logo-77station">
+        </figure>
+        
+      
 
-    <figure class="Station">
-        <img id="station" src="../img/77Station__3_-removebg-preview.png" alt="logo-77station">
-    </figure>
+    <div class="links">
+        <p><a class="link" href="inicio.html">Página inicial</a></p>
+        <p><a class="link" href="">Registros</a></p>
+    </div>
+   
 
     <div class="row">
         <div id="container">
             <input type="text" id="name" placeholder="Digite o nome do veículo" autocomplete="off">
             <input type="text" id="licence" placeholder="Digite a placa do veículo" autocomplete="off">
+            <input type="number" id="licence" placeholder="Digite o ano do veículo" autocomplete="off">
+            <input type="time" id="time" placeholder="Horário de entrada">
+
                 <select id="vehicle-type">
                 <option value="" disabled selected hidden>Selecione o tipo de veículo</option>
                 <option value="Carro">Carro</option>
@@ -27,7 +39,6 @@
                 <option value="Caminhão">Caminhão</option>
             </select>
             
-            <input type="time" id="time" placeholder="Horário de entrada">
             <button id="send">Registrar</button>
 
             <table>
@@ -54,9 +65,10 @@
             <div class="plans">
                 <h3>Planos Disponíveis</h3>
                 <ul>
-                    <li>Plano Básico - R$ 50/mês</li>
-                    <li>Plano Intermediário - R$ 100/mês</li>
-                    <li>Plano Premium - R$ 200/mês</li>
+                    <li>Plano Básico - R$ 25/mês</li>
+                    <li>Plano Intermediário - R$ 50/mês</li>
+                    <li>Plano Gold - R$ 150/mês</li>
+                    <li>Saiba mais sobre outros <a href="#">planos</a>.</li>
                 </ul>
             </div>
             <div class="contact">
