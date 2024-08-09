@@ -16,7 +16,7 @@ function createWindow() {
 
     Menu.setApplicationMenu(Menu.buildFromTemplate(template))
 
-    mainWindow.loadFile('app/index.html');
+    mainWindow.loadFile('app/inicio.html');
 }
 
 app.whenReady().then(() => {

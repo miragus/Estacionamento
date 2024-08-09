@@ -13,6 +13,7 @@ body {
 
 .header {
     width: 100%;
+    height: 60px;
     background-color: #333; /* Dark background for the header */
     color: #CCCCCC;
     text-align: center;
@@ -28,9 +29,8 @@ body {
 }
 
 #station{
-    width: 500px;
-    position: relative;
-    bottom: 50px;
+    width: 250px;
+    
 }
 
 .links{
@@ -45,7 +45,7 @@ body {
 
 .link{
     text-decoration: none;
-    color: #E96379;
+    color: #FF3131;
     font-weight: bold;
 }
 
@@ -55,8 +55,8 @@ body {
 
 .zap{
     width: 20px;
-    padding-left: 5px;
-
+    position: relative;
+    left: 180px;
 }
 
 .row {
@@ -64,24 +64,21 @@ body {
     justify-content: center;
     gap: 20px; /* Space between container and result box */
     width: 100%;
-    margin-top: 60px; /* Space for fixed header */
+    position: relative;
 }
 
 #container {
-    max-width: 300px; /* Increased width for better table display */
+    max-width: 400px; /* Increased width for better table display */
     width: 100%; /* Ensure it uses full width on smaller screens */
     padding: 20px;
     background-color: #282828; /* Slightly lighter dark color for the container */
     border-radius: 8px;
     box-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
     position: relative;
-    bottom: 100px;
 }
 
 .resultado {
-    max-width: 400px; /* Define a maximum width for the result box */
-    width: 100%;
-    height: 200px;
+    width: 15%;
     padding: 20px;
     background-color: #444; /* Background color for the result box */
     border-radius: 8px;
@@ -91,7 +88,20 @@ body {
     flex-direction: column;
     align-items: center;
     position: relative;
-    bottom: 100px;
+}
+
+.result-item{
+    margin-bottom: 10px;
+    padding: 10px;
+    background-color: #3C3C3C;
+    border-radius: 4px;
+    height: 95%;
+    width: 100%;
+    font-size: 25px;
+}
+
+.edit-vehicle{
+    margin-top: 50%;
 }
 
 input[type="text"],
@@ -107,6 +117,16 @@ input[type="time"]
     color: #CCCCCC;
 }
 #vehicle-type {
+    width: calc(100%);
+    padding: 10px;
+    margin-bottom: 10px;
+    border: none;
+    border-radius: 4px;
+    background-color: #3C3C3C;
+    color: #CCCCCC;
+}
+
+.vehicle-type {
     width: calc(100%);
     padding: 10px;
     margin-bottom: 10px;
@@ -332,3 +352,40 @@ footer {
 .footer-content a:hover {
     text-decoration: underline;
 }
+
+/* Modal */
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 1;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgb(0,0,0);
+    background-color: rgba(0,0,0,0.4);
+}
+
+.modal-content {
+    background-color: #000000;
+    margin: 15% auto;
+    padding: 20px;
+    border: 1px solid #888;
+    width: 30%;
+}
+
+.close {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
+}
+

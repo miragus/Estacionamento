@@ -14,197 +14,107 @@
         }, { once: true });
     }
 
-    function convertPeriod(startTime, endTime) {
-        const start = new Date(`1970-01-01T${startTime}:00`);
-        const end = new Date(`1970-01-01T${endTime}:00`);
-        const diff = end - start;
-
-        // Calcula o tempo em horas, arredondando para cima
-        const hours = Math.ceil(diff / (1000 * 60 * 60));
-
-        // Tarifa fixa por hora
-        const tarifaPorHora = 10; // R$10,00 por hora
-
-        // Calcula o valor total arredondando para duas casas decimais
-        const valorTotal = Math.ceil(hours * tarifaPorHora).toFixed(2);
-
-        return valorTotal;
-    }
-
-    function renderGarage() {
-        const garage = getGarage();
-        const garageTable = $('#garage');
-
-        // Limpa o conteúdo da tabela antes de renderizar
-        garageTable.innerHTML = '';
-
-        // Número inicial da vaga
-        let vaga = 1;
-
-        garage.forEach(c => {
-            addCarToGarage(c, garageTable, vaga);
-            vaga++;
-        });
-
-        // Preencher vagas disponíveis até 10
-        for (let i = vaga; i <= 10; i++) {
-            addCarToGarage(null, garageTable, i);
-        }
-    }
-
-    function addCarToGarage(car, table, vaga) {
-        const row = document.createElement("tr");
-        const cell = document.createElement("td");
-
-        if (car) {
-            cell.innerHTML = `
-                <div class="vaga-ocupada">Vaga Ocupada</div>
-                <input type="time" class="exit-time" data-licence="${car.licence}">
-                <button class="details-btn">Detalhes</button>
-                <button class="edit">Editar</button>
-                <button class="delete">X</button>
-            `;
-        } else {
-            cell.innerHTML = `
-                <div class="vaga-disponivel">Vaga Disponível</div>
-            `;
-        }
-
-        row.appendChild(cell);
-        table.appendChild(row);
-
-        if (car) {
-            const detailsBtn = row.querySelector('.details-btn');
-            let detailsRow;
-
-            // Adiciona o evento de clique no botão de detalhes
-            detailsBtn.addEventListener('click', () => {
-                if (detailsRow) {
-                    // Remove a linha de detalhes se já existir
-                    detailsRow.remove();
-                    detailsRow = null;
-                } else {
-                    // Adiciona a linha de detalhes
-                    detailsRow = document.createElement("tr");
-                    detailsRow.innerHTML = `
-                        <td colspan="1" class="details-row">
-                            <div class="result-item">
-                                <p>Veículo: ${car.name}</p>
-                                <p>Placa: ${car.licence}</p>
-                                <p>Tipo: ${car.type}</p>
-                                <p>Entrada: ${car.time}</p>
-                            </div>
-                        </td>
-                    `;
-                    row.after(detailsRow);
-                }
-            });
-
-            // Adiciona o evento de clique no botão de delete
-            row.querySelector('.delete').addEventListener('click', () => {
-                const carInfo = {
-                    name: car.name,
-                    licence: car.licence,
-                    type: car.type,
-                    time: car.time
-                };
-                checkOut(carInfo);
-            });
-
-            // Adiciona o evento de clique no botão de editar
-            row.querySelector('.edit').addEventListener('click', () => {
-                editCar(car);
-            });
-        }
-    }
-
-    
-
-    function checkOut(info) {
-        const exitTimeInput = $(`.exit-time[data-licence="${info.licence}"]`);
-        const exitTime = exitTimeInput.value;
-
-        if (!exitTime) {
-            showAlert("Por favor, insira o horário de saída.");
-            return;
-        }
-
-        const period = convertPeriod(info.time, exitTime);
-        info.exitTime = exitTime;
-
-        const resultDiv = $("#result");
-        resultDiv.innerHTML = `
-            <div class="result-item">
-                <p>Veículo: ${info.name}</p>
-                <p>Placa: ${info.licence}</p>
-                <p>Tipo: ${info.type}</p>
-                <p>Entrada: ${info.time}</p>
-                <p>Saída: ${info.exitTime}</p>
-                <p>Tarifa: R$${period}</p>
-            </div>
-        `;
-
-        const garage = getGarage().filter(c => c.licence !== info.licence);
-        saveToLocalStorage('garage', JSON.stringify(garage));
-
-        renderGarage();
-    }
-
-    function editCar(info) {
-        $("#name").value = info.name;
-        $("#licence").value = info.licence;
-        $("#vehicle-type").value = info.type;
-        $("#time").value = info.time;
-
-        // Remove o carro original da garagem
-        const garage = getGarage().filter(c => c.licence !== info.licence);
-        saveToLocalStorage('garage', JSON.stringify(garage));
-
-        renderGarage();
-    }
-
-    function getGarage() {
-        const garage = JSON.parse(localStorage.getItem('garage')) || [];
-        return garage;
-    }
-
     function saveToLocalStorage(key, value) {
         localStorage.setItem(key, value);
     }
 
-    renderGarage();
+    function showEditModal(vehicle) {
+        const modal = $("#edit-modal");
+        const nameInput = $("#edit-name");
+        const licenceInput = $("#edit-licence");
+        const yearInput = $("#edit-year");
+        const timeInput = $("#edit-time");
+        const typeSelect = $("#edit-type");
 
-    $("#send").addEventListener("click", () => {
+        nameInput.value = vehicle.name;
+        licenceInput.value = vehicle.licence;
+        yearInput.value = vehicle.year;
+        timeInput.value = vehicle.time;
+        typeSelect.value = vehicle.type;
+
+        modal.style.display = "block";
+
+        $("#edit-form").onsubmit = (e) => {
+            e.preventDefault();
+            vehicle.name = nameInput.value;
+            vehicle.licence = licenceInput.value;
+            vehicle.year = yearInput.value;
+            vehicle.time = timeInput.value;
+            vehicle.type = typeSelect.value;
+
+            updateVehicle(vehicle);
+            modal.style.display = "none";
+        };
+    }
+
+    function updateVehicle(vehicle) {
+        let vehicles = JSON.parse(localStorage.getItem('vehicles')) || [];
+        vehicles = vehicles.map(v => v.licence === vehicle.licence ? vehicle : v);
+        saveToLocalStorage('vehicles', JSON.stringify(vehicles));
+        showAlert("Veículo atualizado com sucesso!");
+
+        // Atualizar o resultado
+        $("#result").innerHTML = `
+            <div class="result-item">
+                <p>Veículo: ${vehicle.name}</p>
+                <p>Placa: ${vehicle.licence}</p>
+                <p>Tipo: ${vehicle.type}</p>
+                <p>Entrada: ${vehicle.time}</p>
+                <p>Ano: ${vehicle.year}</p>
+            </div>
+        `;
+    }
+
+    $("#add").addEventListener("click", () => {
         const name = $("#name").value;
         const licence = $("#licence").value;
+        const year = $("#year").value;
+        const time = $("#time").value;
         const type = $("#vehicle-type").value;
-        const timeInput = $("#time").value;
 
-        if (!name || !licence || !type || !timeInput) {
+        if (!name || !licence || !type || !time) {
             showAlert("Todos os campos são obrigatórios.");
             return;
         }
 
-        const garage = getGarage();
+        const vehicle = { name, licence, year, time, type };
+        const vehicles = JSON.parse(localStorage.getItem('vehicles')) || [];
+        vehicles.push(vehicle);
 
-        // Verifica se todas as vagas estão preenchidas
-        if (garage.length >= 10) {
-            showAlert("Todas as vagas estão preenchidas.");
-            return;
-        }
+        saveToLocalStorage('vehicles', JSON.stringify(vehicles));
+        addVehicleToResult(vehicle);
 
-        const car = { name, licence, type, time: timeInput };
+        // Enviar veículo para vagas
+        const garage = JSON.parse(localStorage.getItem('garage')) || [];
+        garage.push(vehicle);
+        localStorage.setItem('garage', JSON.stringify(garage));
 
-        garage.push(car);
-
-        saveToLocalStorage('garage', JSON.stringify(garage));
-
-        renderGarage();
-
+        // Limpar os campos após adicionar o veículo
         $("#name").value = "";
         $("#licence").value = "";
-        $("#vehicle-type").value = "";
+        $("#year").value = "";
         $("#time").value = "";
+        $("#vehicle-type").value = "";
+
+        showAlert("Veículo adicionado com sucesso!");
     });
 
+    function addVehicleToResult(vehicle) {
+        const resultDiv = $("#result");
+        const resultItem = document.createElement("div");
+        resultItem.className = "result-item";
+        resultItem.innerHTML = `
+            <p>Veículo: <span>${vehicle.name}</span></p>
+            <p>Placa: <span>${vehicle.licence}</span></p>
+            <p>Tipo: <span>${vehicle.type}</span></p>
+            <p>Entrada: <span>${vehicle.time}</span></p>
+            <p>Ano: <span>${vehicle.year}</span></p>
+            <button class="edit-vehicle">Editar</button>
+        `;
+        resultDiv.appendChild(resultItem);
+
+        resultItem.querySelector(".edit-vehicle").addEventListener("click", () => {
+            showEditModal(vehicle);
+        });
+    }
 })();

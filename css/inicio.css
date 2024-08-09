@@ -1,6 +1,6 @@
 body {
     font-family: Arial, sans-serif;
-    background-color: #000000; /* Dark background similar to Electron theme */
+    background-color: #333; /* Dark background similar to Electron theme */
     color: #CCCCCC; /* Light text color for contrast */
     margin: 0;
     padding: 0; /* Remove default padding */
@@ -10,11 +10,18 @@ body {
     flex-direction: column; /* Align items vertically */
     min-height: 100vh; /* Ensure full height */
 }
+button{
+    cursor: pointer;
+    text-decoration: none;
+}
+a{
+    text-decoration: none;
+}
 
 .header {
     width: 100%;
     height: 60px;
-    background-color: #333; /* Dark background for the header */
+    background-color: #000000; /* Dark background for the header */
     color: #CCCCCC;
     text-align: center;
     padding: 10px;
@@ -32,7 +39,7 @@ body {
 .divisao{
     width: 50%;
     height: 60px;
-    background-color: #333; /* Dark background for the header */
+    background-color: #000000; /* Dark background for the header */
     color: #CCCCCC;
     text-align: center;
     padding: 10px;
@@ -47,32 +54,20 @@ body {
 
 }
 
-
-
-.links{
-    display: flex;
-    flex-direction: row;
-    position: relative;
-    bottom: 100px;
-    width: 300px;
-    justify-content: space-between;
-    padding: 10px;
-}
-
-.link{
-    text-decoration: none;
-    color: #E96379;
-    font-weight: bold;
-}
-
 .header p {
     margin: 0;
 }
 
+
+#atendimento{ 
+    display: flex;
+    justify-content: space-between;
+    width: 370px;
+}
+
+
 .zap{
     width: 20px;
-    padding-left: 5px;
-
 }
 
 #station{
@@ -81,7 +76,82 @@ body {
     right: 40px;
 }
 
-#atendimento{
-    position: relative;
-    left: 150px;
+#container{
+    display: flex;
+    flex-direction: column;
+    height: 300px;
+    align-items: center;
+}
+
+#cadastro {
+    width: 200px;
+    height: 50px;
+    border-radius: 50px;
+    background-color: #FF3131;
+    color: #000000;
+    border: none;
+    font-weight: bold;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    align-items: center;
+    text-decoration: none;
+    transition: background-color 0.5s, color 0.8s;
+}
+
+#icon-cadastro {
+    width: 20px;
+    height: 20px;
+    background-image: url('../img/enter.png');
+    background-size: cover;
+    background-position: center;
+    transition: background-image 1s;
+}
+
+/* Aplica o hover ao botão inteiro, incluindo a imagem */
+#cadastro:hover {
+    background-color: #921c1c;
+    color: #fff;
+}
+
+#cadastro:hover #icon-cadastro {
+    background-image: url('../img/icons8-login-arredondado-à-direita-50.png');
+}
+
+
+#vagas{
+    margin-top: 20px;
+    width: 200px;
+    height: 50px;
+    border-radius: 50px;
+    background-color: #FF3131;
+    color: #000000;
+    border: none;
+    font-weight: bold;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    align-items: center;
+    text-decoration: none;
+    transition: background-color 0.5s, color 0.8s;
+}
+
+
+#icon-vagas {
+    width: 20px;
+    height: 20px;
+    background-image: url('../img/icons8-carro-30.png');
+    background-size: cover;
+    background-position: center;
+    transition: background-image 1s;
+}
+
+/* Aplica o hover ao botão inteiro, incluindo a imagem */
+#vagas:hover {
+    background-color: #921c1c;
+    color: #fff;
+}
+
+#vagas:hover #icon-vagas {
+    background-image: url('../img/icons8-carro-30\ \(1\).png');
 }

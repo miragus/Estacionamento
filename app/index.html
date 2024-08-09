@@ -8,47 +8,30 @@
 </head>
 <body>
     <div class="header">
-        
-            <p>Atendimento 24H no WhatsApp: (xx) xxxxx-xxxx</p>
-            <img class="zap" src="../img/whatsapp_icon-icons.webp" alt="">
-        </div>
-    
         <figure class="Station">
             <img id="station" src="../img/STAYTION.png" alt="logo-77station">
         </figure>
-        
-      
-
+    </div>
+    
     <div class="links">
         <p><a class="link" href="inicio.html">Página inicial</a></p>
-        <p><a class="link" href="">Registros</a></p>
+        <p><a class="link" href="vagas.html">Registros</a></p>
     </div>
-   
 
     <div class="row">
         <div id="container">
+            <h2>Insira os dados do veículo abaixo:</h2>
             <input type="text" id="name" placeholder="Digite o nome do veículo" autocomplete="off">
             <input type="text" id="licence" placeholder="Digite a placa do veículo" autocomplete="off">
-            <input type="number" id="licence" placeholder="Digite o ano do veículo" autocomplete="off">
+            <input type="number" id="year" placeholder="Digite o ano do veículo" autocomplete="off">
             <input type="time" id="time" placeholder="Horário de entrada">
-
-                <select id="vehicle-type">
+            <select class="vehicle-type" id="vehicle-type">
                 <option value="" disabled selected hidden>Selecione o tipo de veículo</option>
                 <option value="Carro">Carro</option>
                 <option value="Moto">Moto</option>
                 <option value="Caminhão">Caminhão</option>
             </select>
-            
-            <button id="send">Registrar</button>
-
-            <table>
-                <thead>
-                    <tr>
-                        <th>Vaga</th>
-                    </tr>
-                </thead>
-                <tbody id="garage"></tbody>
-            </table>
+            <button id="add">Registrar</button>
         </div>
 
         <div class="resultado">
@@ -60,30 +43,30 @@
         </div>
     </div>
 
-    <footer>
-        <div class="footer-content">
-            <div class="plans">
-                <h3>Planos Disponíveis</h3>
-                <ul>
-                    <li>Plano Básico - R$ 25/mês</li>
-                    <li>Plano Intermediário - R$ 50/mês</li>
-                    <li>Plano Gold - R$ 150/mês</li>
-                    <li>Saiba mais sobre outros <a href="#">planos</a>.</li>
-                </ul>
-            </div>
-            <div class="contact">
-                <h3>Contato</h3>
-                <p>Email: suporte@77station.com.br</p>
-                <p>Telefone: (xx) xxxxx-xxxx</p>
-                <p>WhatsApp: (xx) xxxxx-xxxx</p>
-            </div>
-            <div class="info">
-                <h3>Informações</h3>
-                <p>Para mais informações sobre o sistema, acesse nosso <a href="#">site</a>.</p>
-                <p>Visite nossa <a href="#">página de FAQ</a> para dúvidas frequentes.</p>
-            </div>
+    <!-- Modal de Edição -->
+    <div id="edit-modal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <h2>Editar Veículo</h2>
+            <form id="edit-form">
+                <label for="edit-name">Nome:</label>
+                <input type="text" id="edit-name">
+                <label for="edit-licence">Placa:</label>
+                <input type="text" id="edit-licence">
+                <label for="edit-year">Ano:</label>
+                <input type="number" id="edit-year">
+                <label for="edit-time">Horário de Entrada:</label>
+                <input type="time" id="edit-time">
+                <label for="edit-type">Tipo:</label>
+                <select class="vehicle-type" id="edit-type">
+                    <option value="Carro">Carro</option>
+                    <option value="Moto">Moto</option>
+                    <option value="Caminhão">Caminhão</option>
+                </select>
+                <button type="submit">Salvar</button>
+            </form>
         </div>
-    </footer>
+    </div>
 
     <script src="../js/index.js"></script>
     <script src="../preload.js"></script>
