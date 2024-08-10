@@ -14,19 +14,21 @@
     </div>
     
     <div class="links">
-        <p><a class="link" href="inicio.html">Página inicial</a></p>
-        <p><a class="link" href="vagas.html">Registros</a></p>
+        <a class="link" href="inicio.html">Página inicial</a>
+        <a class="link" href="vagas.html">Registros</a>
     </div>
 
     <div class="row">
         <div id="container">
             <h2>Insira os dados do veículo abaixo:</h2>
+            <p><b>Insira o horário de entrada:</b></p>
+            <input type="time" id="time">
             <input type="text" id="name" placeholder="Digite o nome do veículo" autocomplete="off">
             <input type="text" id="licence" placeholder="Digite a placa do veículo" autocomplete="off">
             <input type="number" id="year" placeholder="Digite o ano do veículo" autocomplete="off">
-            <input type="time" id="time" placeholder="Horário de entrada">
+            
             <select class="vehicle-type" id="vehicle-type">
-                <option value="" disabled selected hidden>Selecione o tipo de veículo</option>
+                <option value="" disabled selected hidden >Selecione o tipo de veículo</option>
                 <option value="Carro">Carro</option>
                 <option value="Moto">Moto</option>
                 <option value="Caminhão">Caminhão</option>

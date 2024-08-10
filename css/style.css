@@ -29,7 +29,8 @@ body {
 }
 
 #station{
-    width: 250px;
+    width: 200px;
+    height: 110px;
     
 }
 
@@ -37,7 +38,7 @@ body {
     display: flex;
     flex-direction: row;
     position: relative;
-    bottom: 100px;
+    bottom: 70px;
     width: 300px;
     justify-content: space-between;
     padding: 10px;

@@ -7,11 +7,52 @@
         const alertOk = $("#alert-ok");
 
         alertMessage.textContent = message;
-        alertDiv.style.display = "block";
+        alertDiv.style.display = "flex"; // Exibe o alerta
 
         alertOk.addEventListener("click", () => {
-            alertDiv.style.display = "none";
+            alertDiv.style.display = "none"; // Oculta o alerta ao clicar em "OK"
         }, { once: true });
+    }
+
+    function showEditModal(car) {
+        const modal = $("#edit-modal");
+        const closeBtn = $(".modal .close");
+        const form = $("#edit-form");
+
+        $("#edit-name").value = car.name;
+        $("#edit-licence").value = car.licence;
+        $("#edit-type").value = car.type;
+        $("#edit-index").value = car.licence;
+
+        modal.style.display = "flex"; // Exibe o modal
+
+        closeBtn.onclick = () => {
+            modal.style.display = "none"; // Oculta o modal ao clicar no botão de fechar
+        };
+
+        window.onclick = event => {
+            if (event.target === modal) {
+                modal.style.display = "none"; // Oculta o modal ao clicar fora dele
+            }
+        };
+
+        form.onsubmit = (event) => {
+            event.preventDefault();
+
+            const name = $("#edit-name").value;
+            const licence = $("#edit-licence").value;
+            const type = $("#edit-type").value;
+
+            if (name && licence && type) {
+                car.name = name;
+                car.licence = licence;
+                car.type = type;
+                updateCar(car);
+                modal.style.display = "none";
+            } else {
+                showAlert("Todos os campos são obrigatórios.");
+            }
+        };
     }
 
     function renderGarage() {
@@ -38,10 +79,13 @@
         if (car) {
             cell.innerHTML = `
                 <div class="vaga-ocupada">Vaga ${vaga} - Ocupada</div>
-                <input type="time" class="exit-time" data-licence="${car.licence}">
-                <button class="details-btn">Detalhes</button>
-                <button class="edit">Editar</button>
-                <button class="delete">X</button>
+                <p class ="saida">Insira o horário de saída abaixo:</p>
+                <input type="time" class="exit-time" required data-licence="${car.licence}">
+                <div class="botoes">
+                    <button class="details-btn">Detalhes</button>
+                    <button class="edit">Editar</button>
+                    <button class="delete">X</button>
+                </div>
             `;
         } else {
             cell.innerHTML = `
@@ -64,12 +108,12 @@
                     detailsRow = document.createElement("tr");
                     detailsRow.innerHTML = `
                         <td colspan="1" class="details-row">
-                            <div class="result-item">
+                            <div class="result-item">Informações do veículo:
+                                <p>Entrada: ${car.time}</p>
                                 <p>Veículo: ${car.name}</p>
                                 <p>Placa: ${car.licence}</p>
                                 <p>Ano: ${car.year}</p>
                                 <p>Tipo: ${car.type}</p>
-                                <p>Entrada: ${car.time}</p>
                             </div>
                         </td>
                     `;
@@ -82,7 +126,7 @@
             });
 
             row.querySelector('.edit').addEventListener('click', () => {
-                editCar(car);
+                showEditModal(car);
             });
         }
     }
@@ -114,19 +158,6 @@
 
         removeCar(car.licence);
         renderGarage();
-    }
-
-    function editCar(car) {
-        const name = prompt("Editar Nome do Veículo:", car.name);
-        const licence = prompt("Editar Placa do Veículo:", car.licence);
-        const type = prompt("Editar Tipo do Veículo:", car.type);
-
-        if (name && licence && type) {
-            car.name = name;
-            car.licence = licence;
-            car.type = type;
-            updateCar(car);
-        }
     }
 
     function convertPeriod(startTime, endTime) {
