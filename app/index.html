@@ -7,25 +7,33 @@
     <title>Estacionamento</title>
 </head>
 <body>
+    <!-- Menu Icon and Sidebar -->
+    <div class="menu-icon" id="menu-icon">
+        &#9776;
+    </div>
+    <div class="sidebar" id="sidebar">
+        <ul>
+            <li><a href="inicio.html">Página Inicial</a></li>
+            <li><a href="index.html">Cadastro</a></li>
+        </ul>
+    </div>
+
     <div class="header">
         <figure class="Station">
-            <img id="station" src="../img/STAYTION.png" alt="logo-77station">
+            <a href="inicio.html">
+                <img id="station" src="../img/staytion-icon.png" alt="logo-77station">
+            </a>
         </figure>
     </div>
-    
-    <div class="links">
-        <a class="link" href="inicio.html">Página inicial</a>
-        <a class="link" href="vagas.html">Registros</a>
-    </div>
+    <h2>Insira os dados do veículo abaixo:</h2>
 
     <div class="row">
         <div id="container">
-            <h2>Insira os dados do veículo abaixo:</h2>
             <p><b>Insira o horário de entrada:</b></p>
             <input type="time" id="time">
             <input type="text" id="name" placeholder="Digite o nome do veículo" autocomplete="off">
             <input type="text" id="licence" placeholder="Digite a placa do veículo" autocomplete="off">
-            <input type="number" id="year" placeholder="Digite o ano do veículo" autocomplete="off">
+            <input type="number" id="year" min="1900" max="2024" placeholder="Digite o ano do veículo" autocomplete="off">
             
             <select class="vehicle-type" id="vehicle-type">
                 <option value="" disabled selected hidden >Selecione o tipo de veículo</option>
@@ -35,15 +43,31 @@
             </select>
             <button id="add">Registrar</button>
         </div>
-
-        <div class="resultado">
-            <div id="result" class="result"></div>
-            <div id="custom-alert" class="custom-alert">
-                <p id="alert-message"></p>
-                <button id="alert-ok">OK</button>
-            </div>
+    
+        <!-- Mover a div de resultado para fora do container -->
+    </div>
+    
+    <div class="resultado">
+        <div id="result" class="result">
+            <table id="vehicle-table">
+                <thead>
+                    <tr>
+                        <th>Veículo</th>
+                        <th>Placa</th>
+                        <th>Tipo</th>
+                        <th>Entrada</th>
+                        <th>Ano</th>
+                        <th>Ação</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <!-- O conteúdo será adicionado dinamicamente aqui -->
+                </tbody>
+            </table>
         </div>
     </div>
+    
+    
 
     <!-- Modal de Edição -->
     <div id="edit-modal" class="modal">
