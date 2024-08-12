@@ -1,62 +1,8 @@
 (function () {
     const $ = q => document.querySelector(q);
 
-    function showAlert(message) {
-        const alertDiv = $("#custom-alert");
-        const alertMessage = $("#alert-message");
-        const alertOk = $("#alert-ok");
-
-        alertMessage.textContent = message;
-        alertDiv.style.display = "flex"; // Exibe o alerta
-
-        alertOk.addEventListener("click", () => {
-            alertDiv.style.display = "none"; // Oculta o alerta ao clicar em "OK"
-        }, { once: true });
-    }
-
-    function showEditModal(car) {
-        const modal = $("#edit-modal");
-        const closeBtn = $(".modal .close");
-        const form = $("#edit-form");
-
-        $("#edit-name").value = car.name;
-        $("#edit-licence").value = car.licence;
-        $("#edit-type").value = car.type;
-        $("#edit-index").value = car.licence;
-
-        modal.style.display = "flex"; // Exibe o modal
-
-        closeBtn.onclick = () => {
-            modal.style.display = "none"; // Oculta o modal ao clicar no botão de fechar
-        };
-
-        window.onclick = event => {
-            if (event.target === modal) {
-                modal.style.display = "none"; // Oculta o modal ao clicar fora dele
-            }
-        };
-
-        form.onsubmit = (event) => {
-            event.preventDefault();
-
-            const name = $("#edit-name").value;
-            const licence = $("#edit-licence").value;
-            const type = $("#edit-type").value;
-
-            if (name && licence && type) {
-                car.name = name;
-                car.licence = licence;
-                car.type = type;
-                updateCar(car);
-                modal.style.display = "none";
-            } else {
-                showAlert("Todos os campos são obrigatórios.");
-            }
-        };
-    }
-
     function renderGarage() {
-        const garage = getGarage();
+        const garage = getFromLocalStorage('garage');
         const garageTable = $('#garage');
         garageTable.innerHTML = '';
 
@@ -167,33 +113,81 @@
 
         const hours = Math.ceil(diff / (1000 * 60 * 60));
         const tarifaPorHora = 10;
-        const valorTotal = Math.ceil(hours * tarifaPorHora).toFixed(2);
+        const valorTotal = Math.ceil(hours * tarifaPorHora);
 
-        return valorTotal;
+        return valorTotal.toFixed(2);
     }
 
-    function getGarage() {
-        return localStorage.garage ? JSON.parse(localStorage.garage) : [];
-    }
+    function showAlert(message) {
+        const alertDiv = $("#custom-alert");
+        const alertMessage = $("#alert-message");
+        const alertOk = $("#alert-ok");
 
-    function saveGarage(garage) {
-        localStorage.garage = JSON.stringify(garage);
+        alertMessage.textContent = message;
+        alertDiv.style.display = "block";
+
+        alertOk.addEventListener("click", () => {
+            alertDiv.style.display = "none";
+        }, { once: true });
     }
 
     function removeCar(licence) {
-        let garage = getGarage();
-        garage = garage.filter(car => car.licence !== licence);
-        saveGarage(garage);
+        const garage = getFromLocalStorage('garage');
+        const updatedGarage = garage.filter(c => c.licence !== licence);
+        saveToLocalStorage('garage', updatedGarage);
     }
 
-    function updateCar(car) {
-        let garage = getGarage();
+    function showEditModal(car) {
+        const modal = $("#edit-modal");
+        const nameInput = $("#edit-name");
+        const licenceInput = $("#edit-licence");
+        const yearInput = $("#edit-year");
+        const timeInput = $("#edit-time");
+        const typeSelect = $("#edit-type");
+
+        nameInput.value = car.name;
+        licenceInput.value = car.licence;
+        yearInput.value = car.year;
+        timeInput.value = car.time;
+        typeSelect.value = car.type;
+
+        modal.style.display = "block";
+
+        $("#edit-form").onsubmit = (e) => {
+            e.preventDefault();
+            car.name = nameInput.value;
+            car.licence = licenceInput.value;
+            car.year = yearInput.value;
+            car.time = timeInput.value;
+            car.type = typeSelect.value;
+
+            updateCarInStorage(car);
+            renderGarage();
+            modal.style.display = "none";
+        };
+    }
+
+    function updateCarInStorage(car) {
+        const garage = getFromLocalStorage('garage');
         const index = garage.findIndex(c => c.licence === car.licence);
         if (index !== -1) {
             garage[index] = car;
-            saveGarage(garage);
+            saveToLocalStorage('garage', garage);
+        }
+    }
+
+    window.addEventListener('message', (event) => {
+        if (event.data === 'updateGarage') {
             renderGarage();
         }
+    });
+
+    function saveToLocalStorage(key, value) {
+        localStorage.setItem(key, JSON.stringify(value));
+    }
+
+    function getFromLocalStorage(key) {
+        return JSON.parse(localStorage.getItem(key)) || [];
     }
 
     renderGarage();

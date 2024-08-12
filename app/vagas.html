@@ -1,11 +1,13 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="../css/vagas.css">
     <title>Controle de Vagas</title>
 </head>
+
 <body>
     <div class="menu-icon" id="menu-icon">
         &#9776;
@@ -39,24 +41,30 @@
     </div>
 
     <!-- Modal para edição de veículo -->
-<div id="edit-modal" class="modal">
-    <div class="modal-content">
-        <span class="close">&times;</span>
-        <h2>Editar Veículo</h2>
-        <form id="edit-form">
-            <label for="edit-name">Nome:</label>
-            <input type="text" id="edit-name" name="name" required>
-            <label for="edit-licence">Placa:</label>
-            <input type="text" id="edit-licence" name="licence" required>
-            <label for="edit-type">Tipo:</label>
-            <input type="text" id="edit-type" name="type" required>
-            <input type="hidden" id="edit-index">
-            <button type="submit">Salvar</button>
-        </form>
-    </div>
-</div>
+    <div id="edit-modal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <h2>Editar Veículo</h2>
+            <form id="edit-form">
+                <label for="edit-name">Nome:</label>
+                <input type="text" id="edit-name" name="name" required>
+                <label for="edit-licence">Placa:</label>
+                <input type="text" id="edit-licence" name="licence" required>
+                <label for="edit-type">Tipo:</label>
+                <input type="text" id="edit-type" name="type" required>
+                <input type="hidden" id="edit-index">
+                <label for="edit-year">Ano:</label>
+                <input type="text" id="edit-year" name="year" required>
+                <label for="edit-time">Hora:</label>
+                <input type="time" id="edit-time" name="time" required>
 
-    
+                <button type="submit">Salvar</button>
+            </form>
+        </div>
+    </div>
+
+
     <script src="../js/vagas.js"></script>
 </body>
+
 </html>

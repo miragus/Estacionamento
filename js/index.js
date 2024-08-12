@@ -15,7 +15,11 @@
     }
 
     function saveToLocalStorage(key, value) {
-        localStorage.setItem(key, value);
+        localStorage.setItem(key, JSON.stringify(value));
+    }
+
+    function getFromLocalStorage(key) {
+        return JSON.parse(localStorage.getItem(key)) || [];
     }
 
     $("#add").addEventListener("click", () => {
@@ -31,6 +35,9 @@
         }
 
         const vehicle = { name, licence, year, time, type };
+        const garage = getFromLocalStorage('garage');
+        garage.push(vehicle);
+        saveToLocalStorage('garage', garage);
         addVehicleToResult(vehicle);
 
         // Limpar os campos após adicionar o veículo
@@ -41,29 +48,54 @@
         $("#vehicle-type").value = "";
 
         showAlert("Veículo adicionado com sucesso!");
+
+        // Adiciona o link abaixo da tabela
+        addVisualizarLink();
     });
 
     function addVehicleToResult(vehicle) {
         const tableBody = $("#vehicle-table tbody");
+
+        // Create a new row for the vehicle data
         const row = document.createElement("tr");
 
         row.innerHTML = `
+            <td>${vehicle.time}</td>
             <td>${vehicle.name}</td>
             <td>${vehicle.licence}</td>
-            <td>${vehicle.type}</td>
-            <td>${vehicle.time}</td>
             <td>${vehicle.year}</td>
-            <td><button class="edit-vehicle">Editar</button></td>
+            <td>${vehicle.type}</td>
         `;
-        
+
+        // Add the new row to the table
         tableBody.appendChild(row);
 
-        row.querySelector(".edit-vehicle").addEventListener("click", () => {
-            showEditModal(vehicle);
+        // Add edit button
+        const editRow = document.createElement("tr");
+        const editCell = document.createElement("td");
+        editCell.colSpan = 5;
+        editCell.innerHTML = `<button class="edit-vehicle">Editar</button>`;
+        editRow.appendChild(editCell);
+        tableBody.appendChild(editRow);
+
+        // Edit button click event
+        editRow.querySelector(".edit-vehicle").addEventListener("click", () => {
+            showEditModal(vehicle, row);
         });
     }
 
-    function showEditModal(vehicle) {
+    function addVisualizarLink() {
+        if (!document.querySelector(".visualizar-veiculos-link")) {
+            const visualizarLink = document.createElement("a");
+            visualizarLink.href = "vagas.html";
+            visualizarLink.className = "visualizar-veiculos-link";
+            visualizarLink.textContent = "Visualizar veículos";
+
+            document.body.appendChild(visualizarLink); // Append to the body
+        }
+    }
+
+    function showEditModal(vehicle, row) {
         const modal = $("#edit-modal");
         const nameInput = $("#edit-name");
         const licenceInput = $("#edit-licence");
@@ -87,28 +119,36 @@
             vehicle.time = timeInput.value;
             vehicle.type = typeSelect.value;
 
-            updateVehicle(vehicle);
+            updateVehicle(vehicle, row);
             modal.style.display = "none";
         };
     }
 
-    function updateVehicle(vehicle) {
-        const tableBody = $("#vehicle-table tbody");
-        const rows = tableBody.querySelectorAll("tr");
+    function updateVehicle(vehicle, row) {
+        row.innerHTML = `
+            <td>${vehicle.time}</td>
+            <td>${vehicle.name}</td>
+            <td>${vehicle.licence}</td>
+            <td>${vehicle.year}</td>
+            <td>${vehicle.type}</td>
+        `;
 
-        rows.forEach(row => {
-            if (row.cells[1].textContent === vehicle.licence) {
-                row.cells[0].textContent = vehicle.name;
-                row.cells[2].textContent = vehicle.type;
-                row.cells[3].textContent = vehicle.time;
-                row.cells[4].textContent = vehicle.year;
-            }
-        });
+        const garage = getFromLocalStorage('garage');
+        const index = garage.findIndex(v => v.licence === vehicle.licence);
+        if (index !== -1) {
+            garage[index] = vehicle;
+            saveToLocalStorage('garage', garage);
+        }
 
         showAlert("Veículo atualizado com sucesso!");
+
+        // Trigger update on the vagas.html page
+        if (window.opener) {
+            window.opener.postMessage('updateGarage', '*');
+        }
     }
 
-    // Limpa a tabela ao recarregar a página
+    // Initialize with empty table
     window.onload = () => {
         $("#vehicle-table tbody").innerHTML = "";
     };

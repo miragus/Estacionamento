@@ -21,11 +21,11 @@
     <div class="header">
         <figure class="Station">
             <a href="inicio.html">
-                <img id="station" src="../img/staytion-icon.png" alt="logo-77station">
+                <img id="station" src="../img/staytion-icon.png" alt="logo da staytion" title="logo da staytion">
             </a>
         </figure>
     </div>
-    <h2>Insira os dados do veículo abaixo:</h2>
+    <h2 style="margin-top: 20px;">Insira os dados do veículo abaixo:</h2>
 
     <div class="row">
         <div id="container">
@@ -46,28 +46,38 @@
     
         <!-- Mover a div de resultado para fora do container -->
     </div>
-    
     <div class="resultado">
         <div id="result" class="result">
-            <table id="vehicle-table">
-                <thead>
-                    <tr>
-                        <th>Veículo</th>
-                        <th>Placa</th>
-                        <th>Tipo</th>
-                        <th>Entrada</th>
-                        <th>Ano</th>
-                        <th>Ação</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <!-- O conteúdo será adicionado dinamicamente aqui -->
-                </tbody>
-            </table>
+<table id="vehicle-table">
+    <thead>''
+        <tr>
+            <th>Entrada</th>
+            <th>Veículo</th>
+            <th>Placa</th>
+            <th>Ano</th>
+            <th>Tipo</th>
+        </tr>
+    </thead>
+    <tbody>
+        <!-- O conteúdo será adicionado dinamicamente aqui -->
+    </tbody>
+</table>
         </div>
     </div>
     
+    <div id="visuzalizar" class="visuzalizar"></div>
+
+    <table id="garage"></table>
+
     
+    <!-- Estrutura de alerta customizado -->
+<div id="custom-alert" style="display:none;">
+    <div id="alert-box">
+        <p id="alert-message"></p>
+        <button id="alert-ok">OK</button>
+    </div>
+</div>
+
 
     <!-- Modal de Edição -->
     <div id="edit-modal" class="modal">

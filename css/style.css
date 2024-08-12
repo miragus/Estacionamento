@@ -134,8 +134,97 @@ body {
 #result{
     border: 1px solid #000000;
     width: 105%;
-    height: 110%;
+    height: 125px;
 }
+
+/* CSS */
+#vehicle-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 20px; /* Espaço entre o botão e a tabela */
+}
+
+#vehicle-table th,
+#vehicle-table td {
+    border: 1px solid #CCCCCC;
+    padding: 8px;
+    text-align: center;
+}
+
+#vehicle-table th {
+    background-color: #333333;
+    color: #FFFFFF;
+}
+
+#vehicle-table tr:nth-child(even) {
+    background-color: #444444;
+}
+
+#vehicle-table tr:nth-child(odd) {
+    background-color: #282828;
+}
+
+button.edit-vehicle {
+    margin-top: 10px;
+    width: 100%;
+    padding: 10px;
+    border: none;
+    border-radius: 4px;
+    background-color: #FF3131;
+    color: white;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+button.edit-vehicle:hover {
+    background-color: #FF5A5A;
+}
+
+/* Style for the 'Visualizar veículos' link */
+.visualizar-veiculos-link {
+    display: block;
+    margin-top: 15px;
+    text-align: center;
+    color: #FF3131; /* Red color to match the theme */
+    font-weight: bold;
+    text-decoration: none;
+    padding: 10px;
+    border-radius: 4px;
+    background-color: #3C3C3C; /* Slightly lighter dark color for contrast */
+    transition: background-color 0.3s;
+}
+
+.visualizar-veiculos-link:hover {
+    background-color: #FF5A5A; /* Slightly lighter red on hover */
+}
+
+
+
+
+/* Estilo para a tabela de vagas */
+#garage-table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+#garage-table th,
+#garage-table td {
+    border: 1px solid #CCCCCC;
+    padding: 8px;
+    text-align: center;
+}
+
+#garage-table th {
+    background-color: #333333;
+    color: #FFFFFF;
+}
+
+#garage-table tr {
+    background-color: #282828;
+    color: #FFFFFF;
+}
+
 
 
 
@@ -147,12 +236,10 @@ th{
     width: 90px;
 }
 
-td{
-}
 
 .resultado {
     width: 500px;
-    height: 150px;
+    height: 127px;
     padding: 20px;
     background-color: #444;
     border-radius: 8px;
@@ -294,20 +381,21 @@ button:hover {
     cursor: pointer;
 }
 
-/* Custom Alert */
-.custom-alert {
+
+#alert-box {
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
     position: fixed;
-    top: 10%;
     left: 50%;
+    top: 50%;
     transform: translate(-50%, -50%);
-    background-color: #FF3131;
-    color: #FFFFFF;
+    background-color: #3C3C3C;
     padding: 20px;
-    border-radius: 5px;
-    box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.5);
+    border: 2px solid black;
+    z-index: 1000;
+    border-radius: 8px;
     font-weight: bold;
-    z-index: 10000;
-    display: none; /* Initially hidden */
 }
 
 body {
