@@ -13,8 +13,9 @@
     </div>
     <div class="sidebar" id="sidebar">
         <ul>
-            <li><a href="inicio.html">Página Inicial</a></li>
-            <li><a href="index.html">Cadastro</a></li>
+            <li><a href="inicio.html"><img src="../img/home.png">Início</a></li>
+            <li><a href="index.html"> <img style="margin-bottom: 5px;" src="../img/private-garage.png">Registro Veículos</a></li>
+            <li><a href="vagas.html"> <img src="../img/car.png">Vagas</a></li>
         </ul>
     </div>
 
@@ -44,20 +45,23 @@
         </form>
     </div>
 
-    <div class="container2">
-        <h2>Clientes Registrados</h2>
-        <table id="client-table">
-            <thead>
-                <tr>
-                    <th>Nome</th>
-                    <th>Email</th>
-                    <th>Telefone</th>
-                </tr>
-            </thead>
-            <tbody>
-                <!-- Clientes registrados aparecerão aqui -->
-            </tbody>
-        </table>
+    <!-- Resultado dos clientes registrados -->
+    <div class="resultado">
+        <div id="result" class="result">
+            <table id="client-table">
+                <thead>
+                    <tr>
+                        <th>Nome</th>
+                        <th>Email</th>
+                        <th>Telefone</th>
+                        <th>Ações</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <!-- O conteúdo será adicionado dinamicamente aqui -->
+                </tbody>
+            </table>
+        </div>
     </div>
 
     <!-- Custom alert -->

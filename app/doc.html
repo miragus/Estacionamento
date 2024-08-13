@@ -4,48 +4,49 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="../css/doc.css">
-    <title>Documentação do Sistema de Estacionamento</title>
-    
+    <title>Documentação do Sistema de Controle de Vagas</title>
 </head>
 <body>
 
-    <h1>Documentação do Sistema de Estacionamento</h1>
+    <h1>Documentação do Sistema de Controle de Vagas</h1>
 
-    <p>O sistema de estacionamento desenvolvido é uma aplicação web utilizando tecnologias padrão como HTML, CSS e JavaScript, juntamente com o framework Electron para funcionalidades adicionais de desktop. Este sistema permite o registro de veículos em um estacionamento, monitorando seus horários de entrada e saída, calculando tarifas com base no tempo de permanência.</p>
+    <p>O sistema de controle de vagas desenvolvido é uma aplicação web utilizando HTML, CSS e JavaScript, com integração ao framework Electron para funcionalidades adicionais. Este sistema é projetado para gerenciar vagas de estacionamento, permitindo o registro, edição e finalização do estacionamento de veículos, bem como o cálculo automático de tarifas com base no tempo de permanência.</p>
 
     <h2>Funcionalidades Principais</h2>
 
     <ol>
         <li>
-            <strong>Registro de Veículos:</strong>
-            <p>Os usuários podem inserir o nome do veículo, a placa e o horário de entrada através de um formulário na interface.</p>
+            <strong>Registro e Gerenciamento de Vagas:</strong>
+            <p>Permite que os usuários visualizem as vagas de estacionamento, tanto ocupadas quanto disponíveis, e registrem novos veículos, incluindo informações como nome, placa, tipo, ano e horário de entrada.</p>
         </li>
         <li>
             <strong>Armazenamento Local:</strong>
-            <p>Utiliza o <code>localStorage</code> do navegador ou a API equivalente do Electron para armazenar os registros de veículos. Isso permite que os dados persistam mesmo após o fechamento da aplicação.</p>
+            <p>Utiliza o <code>localStorage</code> para armazenar as informações dos veículos e vagas, garantindo a persistência dos dados mesmo após o fechamento da aplicação ou recarregamento da página.</p>
         </li>
         <li>
-            <strong>Listagem de Veículos:</strong>
-            <p>Os veículos registrados são exibidos em uma tabela, mostrando o número da vaga, nome do veículo, placa, horário de entrada e campos para inserção do horário de saída.</p>
+            <strong>Visualização de Vagas:</strong>
+            <p>Exibe as vagas de estacionamento em uma tabela, mostrando o número da vaga, e indica se está ocupada ou disponível. Oferece a possibilidade de visualizar detalhes e editar as informações dos veículos.</p>
         </li>
         <li>
             <strong>Cálculo de Tarifas:</strong>
-            <p>Quando um veículo é marcado como pronto para sair (com a inserção do horário de saída), o sistema calcula automaticamente o tempo de permanência e a tarifa com base em uma taxa fixa por hora.</p>
+            <p>Calcula automaticamente a tarifa de estacionamento com base no tempo de permanência do veículo. O cálculo é feito considerando uma taxa fixa por hora e a diferença entre o horário de entrada e saída.</p>
         </li>
         <li>
             <strong>Alertas e Feedback ao Usuário:</strong>
-            <p>O sistema fornece alertas para orientar o usuário, como avisos de campos obrigatórios não preenchidos ou vagas completamente ocupadas. Feedback visual é dado através de uma caixa de alerta personalizada para comunicar mensagens importantes ao usuário.</p>
+            <p>Fornece alertas personalizados para orientar o usuário sobre a necessidade de inserir o horário de saída e confirmações de ações realizadas, como edição e finalização de estacionamento.</p>
         </li>
     </ol>
 
     <h2>Estrutura da Aplicação</h2>
 
-    <p>O sistema é estruturado em um único arquivo HTML que define a estrutura da página, vinculando folhas de estilo CSS para o design e scripts JavaScript para a lógica de funcionamento. Os principais componentes são:</p>
+    <p>A aplicação é estruturada em um único arquivo HTML que define a estrutura da página. Utiliza folhas de estilo CSS para o design e scripts JavaScript para a lógica de funcionamento. Os principais componentes são:</p>
 
     <ul>
-        <li><strong>Formulário de Registro:</strong> Permite a inserção de novos veículos com nome, placa e horário de entrada.</li>
-        <li><strong>Tabela de Registro:</strong> Mostra os veículos registrados, incluindo campos para o horário de saída, permitindo ação de exclusão.</li>
-        <li><strong>Caixa de Alerta:</strong> Utilizada para mensagens de alerta ao usuário, com opção para fechar após leitura.</li>
+        <li><strong>Menu e Sidebar:</strong> Oferecem navegação para diferentes seções da aplicação, como Início, Clientes e Registro de Veículos.</li>
+        <li><strong>Container de Vagas:</strong> Tabela que exibe as vagas de estacionamento, mostrando se estão ocupadas ou disponíveis.</li>
+        <li><strong>Seção de Estatísticas:</strong> Mostra informações sobre o total de vagas, vagas disponíveis e vagas ocupadas.</li>
+        <li><strong>Modais:</strong> Permitem a visualização e edição dos detalhes do veículo, bem como a inserção do horário de saída e cálculo da tarifa.</li>
+        <li><strong>Caixa de Alerta:</strong> Exibe mensagens de alerta personalizadas para o usuário.</li>
     </ul>
 
     <h2>Implementação Técnica</h2>
@@ -53,18 +54,21 @@
     <p>O código JavaScript controla a lógica de negócios, manipulando o armazenamento local, renderização da tabela e cálculo de tarifas. Os principais métodos incluem:</p>
 
     <ul>
-        <li><code>renderGarage()</code>: Renderiza dinamicamente a tabela de veículos registrados.</li>
-        <li><code>checkOut(info)</code>: Calcula e exibe a tarifa e horário de saída ao registrar a saída de um veículo.</li>
+        <li><code>renderGarage()</code>: Renderiza a tabela de vagas com base nos dados armazenados e atualiza as estatísticas.</li>
+        <li><code>showDetailsModal(car)</code>: Exibe um modal com detalhes do veículo e opções para finalizar ou editar o estacionamento.</li>
+        <li><code>configureModalListeners(modal, finishBtn, editBtn, car)</code>: Configura os listeners para os botões dentro do modal de detalhes.</li>
+        <li><code>showEditModal(car)</code>: Exibe um modal para editar as informações do veículo e atualiza o armazenamento local ao salvar as alterações.</li>
+        <li><code>checkOut(car, exitTime)</code>: Calcula a tarifa com base no horário de entrada e saída, e mostra o resultado em um alerta personalizado.</li>
         <li><code>showAlert(message)</code>: Exibe mensagens de alerta para o usuário.</li>
-        <li><code>convertPeriod(startTime, endTime)</code>: Calcula o período de tempo entre o horário de entrada e saída de um veículo, convertendo-o em tarifa.</li>
+        <li><code>convertPeriod(startTime, endTime)</code>: Calcula o período entre o horário de entrada e saída e converte-o em tarifa.</li>
     </ul>
 
     <h2>Conclusão</h2>
 
-    <p>O sistema de estacionamento oferece uma solução simples e eficaz para gerenciar o fluxo de veículos em um estacionamento, proporcionando aos usuários a capacidade de registrar, monitorar e calcular as tarifas de forma automatizada. É projetado para ser intuitivo, fácil de usar e capaz de lidar com até 10 veículos simultaneamente.</p>
+    <p>O sistema de controle de vagas oferece uma solução eficiente para gerenciar vagas de estacionamento, proporcionando aos usuários uma interface intuitiva para registrar, editar e finalizar o estacionamento de veículos. A integração com o localStorage permite a persistência dos dados, enquanto a lógica de cálculo de tarifas e alertas personalizados garante uma experiência de usuário aprimorada e automatizada.</p>
 
     <footer>
-        <p>&copy; 2024 Sistema de Estacionamento. Todos os direitos reservados.</p>
+        <p>&copy; 2024 Sistema de Controle de Vagas. Todos os direitos reservados.</p>
     </footer>
 
 </body>

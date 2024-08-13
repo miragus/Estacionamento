@@ -1,45 +1,215 @@
+/* Arquivo: doc.css */
 
-        body {
-            font-family: Arial, sans-serif;
-            line-height: 1.6;
-            max-width: 800px;
-            margin: 20px auto;
-            padding: 20px;
-            background-color: #f0f0f0;
-            border: 1px solid #ccc;
-            border-radius: 8px;
-            box-shadow: 0 0 10px rgba(0,0,0,0.1);
-        }
+body {
+    font-family: Arial, sans-serif;
+    line-height: 1.6;
+    margin: 0;
+    padding: 0;
+    color: #333;
+    background-color: #f4f4f4;
+}
 
-        h1 {
-            text-align: center;
-            color: #333;
-        }
+h1, h2 {
+    color: #333;
+    margin-top: 20px;
+    margin-bottom: 10px;
+}
 
-        h2 {
-            color: #444;
-            border-bottom: 1px solid #ccc;
-            padding-bottom: 5px;
-            margin-bottom: 10px;
-        }
+h1 {
+    font-size: 2em;
+    text-align: center;
+    margin-top: 30px;
+}
 
-        p {
-            margin-bottom: 10px;
-        }
+h2 {
+    font-size: 1.5em;
+    border-bottom: 2px solid #FF3131;
+    padding-bottom: 5px;
+    margin-bottom: 15px;
+}
 
-        code {
-            background-color: #f4f4f4;
-            padding: 2px 4px;
-            border: 1px solid #ccc;
-            border-radius: 4px;
-            font-family: monospace;
-        }
+p {
+    margin: 0 0 10px 0;
+    padding: 0;
+}
 
-        ul {
-            margin-bottom: 10px;
-        }
+ol, ul {
+    margin: 0 0 20px 20px;
+    padding: 0;
+}
 
-        ul li {
-            margin-bottom: 5px;
-        }
-    
+ol li, ul li {
+    margin-bottom: 10px;
+}
+
+code {
+    font-family: 'Courier New', Courier, monospace;
+    background: #e0e0e0;
+    padding: 2px 4px;
+    border-radius: 3px;
+}
+
+footer {
+    text-align: center;
+    padding: 10px;
+    background-color: #333;
+    color: #fff;
+    position: absolute;
+    width: 100%;
+    bottom: 0;
+}
+
+a {
+    color: #FF3131;
+    text-decoration: none;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+.container {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.menu-icon {
+    display: none; /* Hidden by default; show on smaller screens */
+}
+
+.sidebar {
+    display: none; /* Hidden by default; show on smaller screens */
+}
+
+.header {
+    background: #333;
+    color: #fff;
+    padding: 15px;
+    text-align: center;
+}
+
+.header img {
+    max-width: 100px;
+}
+
+.content {
+    padding: 20px;
+}
+
+.row {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+#container {
+    flex: 1;
+}
+
+.table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 20px;
+}
+
+.table th, .table td {
+    border: 1px solid #ddd;
+    padding: 8px;
+}
+
+.table th {
+    background-color: #f2f2f2;
+}
+
+.modal {
+    display: none; 
+    position: fixed;
+    z-index: 1;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0,0,0,0.4);
+}
+
+.modal-content {
+    background-color: #fefefe;
+    margin: 15% auto;
+    padding: 20px;
+    border: 1px solid #888;
+    width: 80%;
+}
+
+.close, .close-details {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+}
+
+.close:hover, .close-details:hover {
+    color: #000;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.modal-buttons {
+    margin-top: 20px;
+}
+
+.modal-buttons button {
+    padding: 10px 15px;
+    margin: 5px;
+    background-color: #FF3131;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.modal-buttons button:hover {
+    background-color: #e02d2d;
+}
+
+.custom-alert {
+    display: none;
+    position: fixed;
+    z-index: 1;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0,0,0,0.4);
+    padding-top: 60px;
+}
+
+.custom-alert-content {
+    background-color: #fefefe;
+    margin: 5% auto;
+    padding: 20px;
+    border: 1px solid #888;
+    width: 80%;
+}
+
+.custom-alert p {
+    margin: 0 0 15px 0;
+}
+
+.custom-alert button {
+    padding: 10px 15px;
+    background-color: #FF3131;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.custom-alert button:hover {
+    background-color: #e02d2d;
+}
+

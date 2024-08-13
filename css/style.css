@@ -4,11 +4,11 @@ body {
     color: #CCCCCC; /* Light text color for contrast */
     margin: 0;
     padding: 0; /* Remove default padding */
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column; /* Align items vertically */
     min-height: 100vh; /* Ensure full height */
+    display: flex;
+    flex-direction: column; /* Align items vertically */
+    display: flex;
+    align-items: center;
 }
 
 .header {
@@ -23,8 +23,7 @@ body {
     left: 0;
     z-index: 1000;
     display: flex;
-    flex-direction: row;
-    justify-content: center;
+    justify-content: flex-end;
     align-items: center;
 }
 
@@ -58,8 +57,9 @@ body {
 }
 
 .sidebar ul li {
-    padding: 8px 16px;
+    padding-bottom: 150px;
     text-align: center;
+    
 }
 
 .sidebar ul li a {
@@ -68,7 +68,11 @@ body {
     transition: background-color 0.3s;
     color: #FF3131;
     font-weight: bold;
-    text-align: justify;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    
 }
 
 .sidebar ul li a:hover {
@@ -80,68 +84,68 @@ body {
     left: 0; /* Mostra a sidebar ao passar o mouse sobre o ícone ou a própria sidebar */
 }
 
+.visualizar-veiculos-link {
+    display: inline-block;
+    padding: 10px 20px;
+    background-color: #FF3131; /* Cor de destaque */
+    color: #FFFFFF; /* Texto branco */
+    text-decoration: none; /* Remover sublinhado */
+    border-radius: 4px; /* Bordas arredondadas */
+    font-weight: bold;
+    transition: background-color 0.3s, color 0.3s; /* Transição suave */
+    margin: 20px; /* Espaçamento ao redor do link */
+}
+
+.visualizar-veiculos-link:hover {
+    background-color: #CC0000; /* Cor de fundo ao passar o mouse */
+    color: #FFFFFF; /* Manter a cor do texto */
+}
+
+
 #station {
     width: 90px;
     height: 50px;
     position: relative;
-    left: 670px;
+    left: 40px;
 }
 
-.links {
-    display: flex;
-    flex-direction: row;
-    position: relative;
-    bottom: 70px;
-    width: 300px;
-    justify-content: space-between;
-    padding: 10px;
-}
-
-.link {
-    text-decoration: none;
-    color: #FF3131;
-    font-weight: bold;
-}
-
-.header p {
-    margin: 0;
-}
-
-.zap {
-    width: 20px;
-    position: relative;
-    left: 180px;
-}
-
-.row {
-    display: flex;
-    justify-content: center;
-    gap: 20px; /* Space between container and result box */
-    width: 100%;
-    position: relative;
-}
-
-#container {
-    max-width: 400px; /* Increased width for better table display */
-    width: 100%; /* Ensure it uses full width on smaller screens */
+.main-content {
+    margin-top: 80px; /* Adjusted to make room for the fixed header */
     padding: 20px;
-    background-color: #282828; /* Slightly lighter dark color for the container */
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+}
+
+.intro img {
+    position: relative;
+    top: 45px;
+}
+
+.form-container {
+    width: 100%;
+    max-width: 600px; /* Increased width for better form display */
+    padding: 20px;
+    background-color: #282828;
     border-radius: 8px;
     box-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
-    position: relative;
 }
 
-#result{
-    border: 1px solid #000000;
-    width: 105%;
-    height: 125px;
+.resultado {
+    width: 100%;
+    max-width: 600px; /* Match with form-container width */
+    background-color: #444;
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
+    color: #FFFFFF;
+    padding: 20px;
 }
 
-/* CSS */
 #vehicle-table {
     width: 100%;
     border-collapse: collapse;
-    margin-bottom: 20px; /* Espaço entre o botão e a tabela */
 }
 
 #vehicle-table th,
@@ -164,110 +168,10 @@ body {
     background-color: #282828;
 }
 
-button.edit-vehicle {
-    margin-top: 10px;
-    width: 100%;
-    padding: 10px;
-    border: none;
-    border-radius: 4px;
-    background-color: #FF3131;
-    color: white;
-    font-weight: bold;
-    cursor: pointer;
-    transition: background-color 0.3s;
-}
-
-button.edit-vehicle:hover {
-    background-color: #FF5A5A;
-}
-
-/* Style for the 'Visualizar veículos' link */
-.visualizar-veiculos-link {
-    display: block;
-    margin-top: 15px;
-    text-align: center;
-    color: #FF3131; /* Red color to match the theme */
-    font-weight: bold;
-    text-decoration: none;
-    padding: 10px;
-    border-radius: 4px;
-    background-color: #3C3C3C; /* Slightly lighter dark color for contrast */
-    transition: background-color 0.3s;
-}
-
-.visualizar-veiculos-link:hover {
-    background-color: #FF5A5A; /* Slightly lighter red on hover */
-}
-
-
-
-
-/* Estilo para a tabela de vagas */
-#garage-table {
-    width: 100%;
-    border-collapse: collapse;
-}
-
-#garage-table th,
-#garage-table td {
-    border: 1px solid #CCCCCC;
-    padding: 8px;
-    text-align: center;
-}
-
-#garage-table th {
-    background-color: #333333;
-    color: #FFFFFF;
-}
-
-#garage-table tr {
-    background-color: #282828;
-    color: #FFFFFF;
-}
-
-
-
-
-thead{
-    padding: 20px;
-}
-
-th{
-    width: 90px;
-}
-
-
-.resultado {
-    width: 500px;
-    height: 127px;
-    padding: 20px;
-    background-color: #444;
-    border-radius: 8px;
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
-    color: #FFFFFF;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    position: relative;
-}
-
-.result-item {
-    margin-bottom: 10px;
-    padding: 10px;
-    background-color: #3C3C3C;
-    border-radius: 4px;
-    height: 95%;
-    width: 100%;
-    font-size: 25px;
-}
-
-.edit-vehicle {
-    margin-top: 50%;
-}
-
 input[type="text"],
 input[type="number"],
-input[type="time"] {
+input[type="time"],
+select {
     width: calc(100% - 20px);
     padding: 10px;
     margin-bottom: 10px;
@@ -287,88 +191,75 @@ input[type="time"] {
     color: #CCCCCC;
 }
 
-.vehicle-type {
-    width: calc(100%);
-    padding: 10px;
-    margin-bottom: 10px;
-    border: none;
-    border-radius: 4px;
-    background-color: #3C3C3C;
-    color: #CCCCCC;
-}
-
 button {
     width: 100%;
     padding: 10px;
     border: none;
     border-radius: 4px;
-    background-color: #FF3131; /* Electron blue color */
-    color: white;
-    font-weight: bold;
+    background-color: #FF3131;
+    color: #FFFFFF;
     cursor: pointer;
-    transition: background-color 0.3s;
 }
 
 button:hover {
-    background-color: #FF3131; /* Slightly darker blue on hover */
+    background-color: #CC0000;
 }
 
-.result-item {
-    margin-bottom: 10px;
+#custom-alert {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: #444;
+    color: #FFFFFF;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
+}
+
+#alert-box {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+#alert-ok {
+    background-color: #FF3131;
+    border: none;
     padding: 10px;
-    background-color: #3C3C3C; /* Background color for each item */
     border-radius: 4px;
+    color: #FFFFFF;
+    cursor: pointer;
 }
 
-.result-item p {
-    margin: 0;
-    padding: 5px 0;
-    border-bottom: 1px solid #444; /* Border for separation */
+#alert-ok:hover {
+    background-color: #CC0000;
 }
 
-.result-item p:last-child {
-    border-bottom: none; /* Remove border from last item */
-}
-
-.details-row {
-    background-color: #3C3C3C; /* Background color for details row */
-    color: #FFFFFF; /* Text color */
-}
-
-.details-row .result-item {
-    padding: 10px;
-    border: none; /* Remove border */
-}
-
-.details-row .result-item p {
-    padding: 10px 0;
-    border: 1px solid rgba(0, 0, 0, 0.5);
-}
-
-/* Modal */
 .modal {
     display: none;
     position: fixed;
-    z-index: 1;
+    z-index: 1000;
     left: 0;
     top: 0;
     width: 100%;
     height: 100%;
     overflow: auto;
-    background-color: rgb(0, 0, 0);
-    background-color: rgba(0, 0, 0, 0.4);
+    background-color: rgba(0,0,0,0.5);
 }
 
 .modal-content {
-    background-color: #000000;
+    background-color: #282828;
     margin: 15% auto;
     padding: 20px;
     border: 1px solid #888;
-    width: 30%;
+    width: 80%;
+    max-width: 500px;
+    border-radius: 8px;
 }
 
 .close {
-    color: #aaa;
+    color: #FFFFFF;
     float: right;
     font-size: 28px;
     font-weight: bold;
@@ -376,35 +267,7 @@ button:hover {
 
 .close:hover,
 .close:focus {
-    color: black;
+    color: #FF3131;
     text-decoration: none;
     cursor: pointer;
-}
-
-
-#alert-box {
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
-    position: fixed;
-    left: 50%;
-    top: 50%;
-    transform: translate(-50%, -50%);
-    background-color: #3C3C3C;
-    padding: 20px;
-    border: 2px solid black;
-    z-index: 1000;
-    border-radius: 8px;
-    font-weight: bold;
-}
-
-body {
-    font-family: Arial, sans-serif;
-    background-color: #000000;
-    color: #CCCCCC;
-    margin: 0;
-    padding: 0;
-    display: flex;
-    min-height: 100vh;
-    justify-content: center;
 }

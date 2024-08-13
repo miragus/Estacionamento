@@ -8,7 +8,7 @@ function createWindow() {
         width: 1440,
         height: 900,
         resizable: false,
-        icon: 'img/transport.ico',
+        icon: 'img/private-garage.ico',
         webPreferences: {
             preload: path.join(__dirname, 'preload.js')
         }
@@ -60,7 +60,7 @@ const template = [
         submenu: [
             {
                 label: 'Documentação',
-                click: () => janelaDoc()
+                click: () => shell.openExternal('https://drive.google.com/file/d/11C7oLXubJOiLhqKuAM2dKWRDws8nebni/view?usp=sharing')
             },
             { type: 'separator' },
             {

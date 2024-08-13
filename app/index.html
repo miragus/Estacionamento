@@ -1,89 +1,87 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="../css/style.css">
     <title>Cadastro de Veículos</title>
 </head>
+
 <body>
-    <!-- Menu Icon and Sidebar -->
+    <div class="header">
+        <figure class="Station">
+            <a href="https://www.palmeiras.com.br/">
+                <img id="station" src="../img/staytion-icon.png" alt="logo da staytion" title="logo da staytion">
+            </a>
+        </figure>
+    </div>
+
     <div class="menu-icon" id="menu-icon">
         &#9776;
     </div>
     <div class="sidebar" id="sidebar">
         <ul>
-            <li><a href="inicio.html">Página Inicial</a></li>
-            <li><a href="index.html">Cadastro</a></li>
+            <li><a href="inicio.html"><img src="../img/home.png">Início</a></li>
+            <li><a href="cliente.html"><img style="margin-bottom: 5px;" src="../img/user-red.png">Clientes</a></li>
+            <li><a href="vagas.html"> <img src="../img/car.png">Vagas</a></li>
         </ul>
-    </div>
 
-    <div class="header">
-        <figure class="Station">
-            <a href="inicio.html">
-                <img id="station" src="../img/staytion-icon.png" alt="logo da staytion" title="logo da staytion">
-            </a>
-        </figure>
-    </div>
-    <div style="display: flex; flex-direction: column; align-items: center;">
-        <figure>
-            <img style="position: relative; top: 45px;" src="../img/icons8-car-60.png" alt="icone carro branco">
-        </figure>
-        <h2 style="margin-top: 20px;">Insira os dados do veículo abaixo:</h2>
 
     </div>
 
-    <div class="row">
-        <div id="container">
+    <main class="main-content">
+        <div style="display: flex; flex-direction: column; justify-content: center; align-items: center;" class="intro">
+            <figure>
+                <img src="../img/icons8-car-60.png" alt="icone carro branco">
+            </figure>
+            <h2>Insira os dados do veículo abaixo:</h2>
+        </div>
+
+        <div class="form-container">
             <p><b>Insira o horário de entrada:</b></p>
             <input type="time" id="time">
             <input type="text" id="name" placeholder="Digite o nome do veículo" autocomplete="off">
             <input type="text" id="licence" placeholder="Digite a placa do veículo" autocomplete="off">
-            <input type="number" id="year" min="1900" max="2024" placeholder="Digite o ano do veículo" autocomplete="off">
-            
+            <input type="number" id="year" min="1900" max="2024" placeholder="Digite o ano do veículo"
+                autocomplete="off">
+
             <select class="vehicle-type" id="vehicle-type">
-                <option value="" disabled selected hidden >Selecione o tipo de veículo</option>
+                <option value="" disabled selected hidden>Selecione o tipo de veículo</option>
                 <option value="Carro">Carro</option>
                 <option value="Moto">Moto</option>
                 <option value="Caminhão">Caminhão</option>
             </select>
             <button id="add">Registrar</button>
         </div>
-    
-        <!-- Mover a div de resultado para fora do container -->
-    </div>
-    <div class="resultado">
-        <div id="result" class="result">
-<table id="vehicle-table">
-    <thead>
-        <tr>
-            <th>Entrada</th>
-            <th>Veículo</th>
-            <th>Placa</th>
-            <th>Ano</th>
-            <th>Tipo</th>
-        </tr>
-    </thead>
-    <tbody>
-        <!-- O conteúdo será adicionado dinamicamente aqui -->
-    </tbody>
-</table>
+
+        <div class="resultado">
+            <div id="result" class="result">
+                <table id="vehicle-table">
+                    <thead>
+                        <tr>
+                            <th>Entrada</th>
+                            <th>Veículo</th>
+                            <th>Placa</th>
+                            <th>Ano</th>
+                            <th>Tipo</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <!-- O conteúdo será adicionado dinamicamente aqui -->
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </main>
+
+    <!-- Estrutura de alerta customizado -->
+    <div id="custom-alert" style="display:none;">
+        <div id="alert-box">
+            <p id="alert-message"></p>
+            <button id="alert-ok">OK</button>
         </div>
     </div>
-    
-    <div id="visuzalizar" class="visuzalizar"></div>
-
-    <table id="garage"></table>
-
-    
-    <!-- Estrutura de alerta customizado -->
-<div id="custom-alert" style="display:none;">
-    <div id="alert-box">
-        <p id="alert-message"></p>
-        <button id="alert-ok">OK</button>
-    </div>
-</div>
-
 
     <!-- Modal de Edição -->
     <div id="edit-modal" class="modal">
@@ -113,4 +111,5 @@
     <script src="../js/index.js"></script>
     <script src="../preload.js"></script>
 </body>
+
 </html>
