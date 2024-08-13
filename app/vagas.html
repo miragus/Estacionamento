@@ -18,8 +18,18 @@
             <li><a href="index.html">Cadastro</a></li>
         </ul>
     </div>
+
+    <div class="header">
+        <figure class="Station">
+            <a href="inicio.html">
+                <img id="station" src="../img/staytion-icon.png" alt="logo da staytion" title="logo da staytion">
+            </a>
+        </figure>
+    </div>
+
     <div class="content">
         <div class="row">
+            <!-- Container das Vagas -->
             <div id="container">
                 <table>
                     <thead>
@@ -30,8 +40,24 @@
                     <tbody id="garage"></tbody>
                 </table>
             </div>
+    
+            <!-- Seção de Estatísticas ao lado direito do container -->
+            <div class="statistics">
+                <div class="stat-item">
+                    <div class="stat-label">Total de Vagas</div>
+                    <div id="total-spots" class="stat-value">10</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-label">Vagas Disponíveis</div>
+                    <div id="available-spots" class="stat-value">0</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-label">Vagas Ocupadas</div>
+                    <div id="occupied-spots" class="stat-value">0</div>
+                </div>
+            </div>
+    
             <div class="resultado">
-                <div id="result" class="result"></div>
                 <div id="custom-alert" class="custom-alert">
                     <p id="alert-message"></p>
                     <button id="alert-ok">OK</button>
@@ -39,6 +65,9 @@
             </div>
         </div>
     </div>
+    
+    
+    
 
     <!-- Modal para edição de veículo -->
     <div id="edit-modal" class="modal">

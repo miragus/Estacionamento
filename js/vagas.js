@@ -4,19 +4,34 @@
     function renderGarage() {
         const garage = getFromLocalStorage('garage');
         const garageTable = $('#garage');
+        const totalSpots = 10;
+        let occupiedSpots = 0;
+    
         garageTable.innerHTML = '';
-
+    
         let vaga = 1;
-
+    
         garage.forEach(c => {
             addCarToGarage(c, garageTable, vaga);
             vaga++;
+            occupiedSpots++;
         });
-
-        for (let i = vaga; i <= 10; i++) {
+    
+        for (let i = vaga; i <= totalSpots; i++) {
             addCarToGarage(null, garageTable, i);
         }
+    
+        // Atualizar as estatísticas
+        updateStatistics(totalSpots, totalSpots - occupiedSpots, occupiedSpots);
     }
+    
+    function updateStatistics(total, available, occupied) {
+        $('#total-spots').textContent = total;
+        $('#available-spots').textContent = available;
+        $('#occupied-spots').textContent = occupied;
+    }
+    
+    
 
     function addCarToGarage(car, table, vaga) {
         const row = document.createElement("tr");
@@ -80,17 +95,17 @@
     function checkOut(car) {
         const exitTimeInput = $(`.exit-time[data-licence="${car.licence}"]`);
         const exitTime = exitTimeInput.value;
-
+    
         if (!exitTime) {
             showAlert("Por favor, insira o horário de saída.");
             return;
         }
-
+    
         const period = convertPeriod(car.time, exitTime);
         car.exitTime = exitTime;
-
-        const resultDiv = $("#result");
-        resultDiv.innerHTML = `
+    
+        // Use o custom alert para mostrar o resultado
+        const message = `
             <div class="result-item">
                 <p>Veículo: ${car.name}</p>
                 <p>Placa: ${car.licence}</p>
@@ -101,10 +116,13 @@
                 <p>Valor: R$ ${period}</p>
             </div>
         `;
-
+        showAlert(message);
+    
         removeCar(car.licence);
         renderGarage();
     }
+    
+    
 
     function convertPeriod(startTime, endTime) {
         const start = new Date(`1970-01-01T${startTime}:00`);
@@ -122,15 +140,16 @@
         const alertDiv = $("#custom-alert");
         const alertMessage = $("#alert-message");
         const alertOk = $("#alert-ok");
-
-        alertMessage.textContent = message;
+    
+        alertMessage.innerHTML = message;  // Permitir HTML dentro do alerta
         alertDiv.style.display = "block";
-
+    
         alertOk.addEventListener("click", () => {
             alertDiv.style.display = "none";
         }, { once: true });
     }
-
+    
+    
     function removeCar(licence) {
         const garage = getFromLocalStorage('garage');
         const updatedGarage = garage.filter(c => c.licence !== licence);
