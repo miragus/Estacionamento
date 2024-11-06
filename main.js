@@ -3,6 +3,13 @@ const path = require('path');
 
 let mainWindow = null;
 
+try {
+    require('electron-reloader')(module);
+} catch (err) {
+    console.log('Falha ao carregar o reloader:', err);
+}
+
+
 function createWindow() {
     mainWindow = new BrowserWindow({
         width: 1440,
@@ -17,6 +24,7 @@ function createWindow() {
     Menu.setApplicationMenu(Menu.buildFromTemplate(template))
 
     mainWindow.loadFile('app/inicio.html');
+    mainWindow.maximize()
 }
 
 app.whenReady().then(() => {

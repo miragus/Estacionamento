@@ -4,7 +4,7 @@
     function renderGarage() {
         const garage = getFromLocalStorage('garage');
         const garageTable = $('#garage');
-        const totalSpots = 10;
+        const totalSpots = 12;
         let occupiedSpots = 0;
 
         garageTable.innerHTML = '';
@@ -37,12 +37,12 @@
 
         if (car) {
             cell.innerHTML = `
-                <div class="vaga-ocupada">Vaga ${vaga} - Ocupada</div>
+                <div class="vaga-ocupada">Vaga ${vaga} Ocupada</div>
                 <button class="details-btn">Detalhes</button>
             `;
         } else {
             cell.innerHTML = `
-                <div class="vaga-disponivel">Vaga ${vaga} - Disponível</div>
+                <div class="vaga-disponivel">Vaga ${vaga} Disponível</div>
             `;
         }
 
