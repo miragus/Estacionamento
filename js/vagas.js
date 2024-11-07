@@ -72,10 +72,7 @@
                 <p>Ano: ${car.year}</p>
                 <p>Tipo: ${car.type}</p>
 
-                <div id="botao-saida">
-                <label for="exit-time-input">Horário de Saída:</label>
-                <input type="time" id="exit-time-input">
-                </div>
+                
                 
             </div>
         `;
