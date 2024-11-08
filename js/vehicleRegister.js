@@ -90,8 +90,13 @@
             visualizarLink.href = "vagas.html";
             visualizarLink.className = "visualizar-veiculos-link";
             visualizarLink.textContent = "Visualizar veículos";
-
-            document.body.appendChild(visualizarLink); // Append to the body
+            const resultado = document.querySelector("#vehicleResult");
+        
+            if (resultado) {
+                resultado.appendChild(visualizarLink);
+            } else {
+                console.error("Elemento com o ID 'vehicleResult' não foi encontrado.");
+            }
         }
     }
 

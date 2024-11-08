@@ -4,14 +4,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/vehicleRegister.css">
     <title>Cadastro de Veículos</title>
 </head>
 
 <body>
     <div class="header">
         <figure class="Station">
-            <a href="https://www.palmeiras.com.br/">
+            <a href="inicio.html">
                 <img id="station" src="../img/staytion-icon.png" alt="logo da staytion" title="logo da staytion">
             </a>
         </figure>
@@ -30,13 +30,13 @@
 
     </div>
 
+    <div class="insertBelow" class="intro">
+        <figure>
+            <img class="imgVehicle" src="../img/icons8-car-60.png" alt="icone carro branco">
+        </figure>
+        <h1>Insira os dados do veículo abaixo:</h1>
+    </div>
     <main class="main-content">
-        <div style="display: flex; flex-direction: column; justify-content: center; align-items: center;" class="intro">
-            <figure>
-                <img src="../img/icons8-car-60.png" alt="icone carro branco">
-            </figure>
-            <h2>Insira os dados do veículo abaixo:</h2>
-        </div>
 
         <div class="form-container">
             <p><b>Insira o horário de entrada:</b></p>
@@ -55,7 +55,7 @@
             <button id="add">Registrar</button>
         </div>
 
-        <div class="resultado">
+        <div id="resultado">
             <div id="result" class="result">
                 <table id="vehicle-table">
                     <thead>
@@ -71,6 +71,22 @@
                         <!-- O conteúdo será adicionado dinamicamente aqui -->
                     </tbody>
                 </table>
+                <div id="vehicleResult"></div>
+    
+                    <div class="statistics">
+                        <div class="stat-item">
+                            <div class="stat-label">Total de Vagas</div>
+                            <div id="total-spots" class="stat-value">10</div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-label">Vagas Disponíveis</div>
+                            <div id="available-spots" class="stat-value">0</div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-label">Vagas Ocupadas</div>
+                            <div id="occupied-spots" class="stat-value">0</div>
+                        </div>
+            </div>
             </div>
         </div>
     </main>
@@ -108,7 +124,7 @@
         </div>
     </div>
 
-    <script src="../js/index.js"></script>
+    <script src="../js/vehicleRegister.js"></script>
     <script src="../preload.js"></script>
 </body>
 
