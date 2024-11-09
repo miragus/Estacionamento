@@ -26,7 +26,7 @@ a{
 .header {
     width: 100%;
     height: 60px;
-    background-color: #000000; 
+    background-color: #333333; 
     color: #CCCCCC;
     text-align: center;
     padding: 10px;
@@ -44,7 +44,7 @@ a{
 .divisao{
     width: 50%;
     height: 60px;
-    background-color: #000000;
+    background-color: #333333;
     color: #CCCCCC;
     text-align: center;
     padding: 10px;
@@ -76,9 +76,8 @@ a{
 }
 
 #station{
-    width: 200px;
+    width:300px;
     position: relative;
-    right: 40px;
 }
 
 #container{
