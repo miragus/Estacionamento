@@ -1,5 +1,6 @@
 (function () {
     const $ = q => document.querySelector(q);
+    const limiteVagas = 12; //limite de vagas
 
     function showAlert(message) {
         const alertDiv = $("#custom-alert");
@@ -23,40 +24,71 @@
     }
 
     $("#add").addEventListener("click", () => {
+        const garage = getFromLocalStorage('garage');
+    
+        // Verifica se o número de veículos já atingiu o limite máximo
+        if (garage.length >= limiteVagas) {
+            showAlert("O limite de vagas foi atingido. Não é possível adicionar mais veículos.");
+            return; // Sai da função antes de adicionar o veículo
+        }
+    
         const name = $("#name").value;
         const licence = $("#licence").value;
         const year = $("#year").value;
         const time = $("#time").value;
         const type = $("#vehicle-type").value;
-
+    
         if (!name || !licence || !type || !time) {
             showAlert("Todos os campos são obrigatórios.");
             return;
         }
-
+    
         const vehicle = { name, licence, year, time, type };
-        const garage = getFromLocalStorage('garage');
         garage.push(vehicle);
         saveToLocalStorage('garage', garage);
         addVehicleToResult(vehicle);
-
+    
         // Limpar os campos após adicionar o veículo
         $("#name").value = "";
         $("#licence").value = "";
         $("#year").value = "";
         $("#time").value = "";
         $("#vehicle-type").value = "";
-
+    
         showAlert("Veículo adicionado com sucesso!");
-
+    
         // Adiciona o link abaixo da tabela
         addVisualizarLink();
+        // Atualiza as estatísticas
+        calculateAndUpdateStatistics();
     });
+    
+
+
+    function updateStatistics(total, available, occupied) {
+        $('#total-spots').textContent = total;
+        $('#available-spots').textContent = available;
+        $('#occupied-spots').textContent = occupied;
+    }
+
+    function calculateAndUpdateStatistics() {
+        const totalSpots = limiteVagas; // Exemplo de total de vagas, ajuste conforme necessário
+        const garage = getFromLocalStorage('garage');
+        const occupiedSpots = garage.length;
+        const availableSpots = totalSpots - occupiedSpots;
+    
+        updateStatistics(totalSpots, availableSpots, occupiedSpots);
+    }
+        
+
+    
 
     function addVehicleToResult(vehicle) {
         const tableBody = $("#vehicle-table tbody");
 
-        // Create a new row for the vehicle data
+        tableBody.innerHTML = "";
+
+        // cria uma nova row para os dados do veiculo
         const row = document.createElement("tr");
 
         row.innerHTML = `
@@ -67,10 +99,10 @@
             <td>${vehicle.type}</td>
         `;
 
-        // Add the new row to the table
+        // add uma nova row na tabela
         tableBody.appendChild(row);
 
-        // Add edit button
+        // adciciona botao de edit
         const editRow = document.createElement("tr");
         const editCell = document.createElement("td");
         editCell.colSpan = 5;
@@ -78,7 +110,7 @@
         editRow.appendChild(editCell);
         tableBody.appendChild(editRow);
 
-        // Edit button click event
+        // evento do botao de edit
         editRow.querySelector(".edit-vehicle").addEventListener("click", () => {
             showEditModal(vehicle, row);
         });
@@ -147,14 +179,16 @@
 
         showAlert("Veículo atualizado com sucesso!");
 
-        // Trigger update on the vagas.html page
+        // força a atualizar as vagas na pagina de html
         if (window.opener) {
             window.opener.postMessage('updateGarage', '*');
         }
+        calculateAndUpdateStatistics();
     }
 
-    // Initialize with empty table
+    // inicializa uma tabela vazia
     window.onload = () => {
         $("#vehicle-table tbody").innerHTML = "";
+        calculateAndUpdateStatistics();
     };
 })();

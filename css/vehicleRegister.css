@@ -83,7 +83,7 @@ body {
 }
 
 .main-content {
-    width: 100%;
+    width: 98%;
     display: flex;
     gap: 20px;
 }
@@ -105,7 +105,8 @@ body {
 }
 
 #resultado {
-    width: 50%;
+    width: 70%;
+    height: auto;
     font-size: 22px;
     background-color: #444;
     border-radius: 8px;
@@ -158,9 +159,10 @@ body {
 
 .statistics {
     display: flex;
-    align-items: center;
-    justify-content: center;
-    height: 40%;
+    flex-direction: row;
+    position: fixed;
+    bottom: 125px;
+    left: 53%;
 }
 
 .stat-item {
@@ -177,6 +179,7 @@ body {
     margin: 20px;
     border-radius: 8px;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+
 }
 
 .stat-label {
