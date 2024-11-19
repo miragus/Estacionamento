@@ -9,7 +9,7 @@ const pool = new Pool({
     user: 'postgres', // substitua com seu usuário do PostgreSQL
     host: 'localhost', // ou endereço do servidor PostgreSQL
     database: 'vehicle', // substitua pelo nome da sua base de dados
-    password: 'Welcome!', // substitua pela sua senha
+    password: 'BemVindo!', // substitua pela sua senha
     port: 5432, // porta padrão do PostgreSQL
 });
 
@@ -31,6 +31,8 @@ app.post('/api/vehicle', async (req, res) => {
         res.status(500).json({ error: 'Erro ao inserir veículo' });
     }
 });
+
+
 
 app.put('/api/vehicle', async (req, res) => {
     const { name, licence, year, time, type } = req.body;

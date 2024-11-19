@@ -12,4 +12,4 @@ CREATE TABLE vehicles (
 
 netstat -ano | findstr :3000
 
-taskkill /PID 9336 /F
+    taskkill /PID *PID encontrado* /F

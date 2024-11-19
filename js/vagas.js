@@ -9,31 +9,36 @@
         // Limpa a tabela
         garageTable.innerHTML = '';
 
-        // Faz a requisição para a API para obter os veículos
+        // Busca os veículos no servidor
+        const vehicles = await fetchVehiclesFromServer();
+
+        // Preenche a tabela com os dados dos veículos
+        vehicles.forEach((car, index) => {
+            occupiedSpots++;
+            addCarToGarage(car, garageTable, index + 1);
+        });
+
+        // Preenche as vagas restantes como 'Disponível'
+        for (let i = occupiedSpots + 1; i <= totalSpots; i++) {
+            addCarToGarage(null, garageTable, i);
+        }
+
+        // Atualiza as estatísticas
+        const availableSpots = totalSpots - occupiedSpots;
+        updateStatistics(totalSpots, availableSpots, occupiedSpots);
+    }
+
+    async function fetchVehiclesFromServer() {
         try {
             const response = await fetch('http://localhost:3000/api/vehicle');
-            const garage = await response.json(); // Assume que a resposta é um array de veículos
-            let vaga = 1;
-
-            // Preenche as vagas com os carros da garagem
-            garage.forEach(c => {
-                addCarToGarage(c, garageTable, vaga);
-                vaga++;
-                occupiedSpots++;
-            });
-
-            // Preenche as vagas restantes com "Disponível"
-            for (let i = vaga; i <= totalSpots; i++) {
-                addCarToGarage(null, garageTable, i);
+            if (!response.ok) {
+                throw new Error('Erro ao buscar veículos');
             }
-
-            // Atualizar as estatísticas
-            updateStatistics(totalSpots, totalSpots - occupiedSpots, occupiedSpots);
-
+            const vehicles = await response.json();
+            return vehicles;
         } catch (err) {
-            console.error('Erro ao buscar os veículos:', err);
-            // Caso haja erro, você pode mostrar uma mensagem de erro na tela
-            showAlert("Erro ao carregar os veículos. Tente novamente.");
+            console.error('Erro ao buscar veículos:', err);
+            return [];
         }
     }
 
@@ -120,8 +125,6 @@
         $(".close-details").removeEventListener('click', handleCloseClick);
         $(".close-details").addEventListener('click', handleCloseClick);
 
-        
-    
         function handleCloseClick() {
             modal.style.display = "none";
         }
@@ -186,7 +189,6 @@
             }
         };
     }
-    
 
     function checkOut(car, exitTime) {
         const period = convertPeriod(car.time, exitTime);
