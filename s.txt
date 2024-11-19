@@ -1,0 +1,15 @@
+CREATE TABLE vehicles (
+    id SERIAL PRIMARY KEY,
+    name VARCHAR(100) NOT NULL,
+    licence VARCHAR(20) UNIQUE NOT NULL,
+    year VARCHAR (4),
+    time TIME NOT NULL,
+    type VARCHAR(50) NOT NULL
+);
+
+
+
+
+netstat -ano | findstr :3000
+
+taskkill /PID 9336 /F

@@ -1,5 +1,6 @@
 const { app, BrowserWindow, Menu, shell, nativeTheme } = require('electron');
 const path = require('path');
+const { exec } = require('child_process');
 
 let mainWindow = null;
 
@@ -9,6 +10,19 @@ try {
     console.log('Falha ao carregar o reloader:', err);
 }
 
+// Iniciar o servidor Node.js
+function startServer() {
+    exec('node server.js', (err, stdout, stderr) => {
+        if (err) {
+            console.error('Erro ao iniciar o servidor:', err);
+            return;
+        }
+        console.log('Servidor iniciado:', stdout);
+        if (stderr) {
+            console.error('Erro de execução do servidor:', stderr);
+        }
+    });
+}
 
 function createWindow() {
     mainWindow = new BrowserWindow({
@@ -21,16 +35,18 @@ function createWindow() {
         }
     });
 
-    Menu.setApplicationMenu(Menu.buildFromTemplate(template))
+    Menu.setApplicationMenu(Menu.buildFromTemplate(template));
 
     mainWindow.loadFile('app/inicio.html');
-    mainWindow.maximize()
+    mainWindow.maximize();
 }
 
+// Iniciar o servidor quando a aplicação Electron estiver pronta
 app.whenReady().then(() => {
+    startServer();
     createWindow();
 
-    nativeTheme.themeSource = 'dark'
+    nativeTheme.themeSource = 'dark';
 
     app.on('activate', function () {
         if (BrowserWindow.getAllWindows().length === 0) createWindow();

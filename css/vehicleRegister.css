@@ -355,3 +355,33 @@ button:hover {
     left: 0;
     /* Mostra a sidebar ao passar o mouse sobre o ícone ou a própria sidebar */
 }
+
+
+@media(max-width: 1440px){
+
+    .statistics {
+    display: flex;
+    flex-direction: row;
+    position: fixed;
+    bottom: 50px;
+    left: 835px;
+    width: auto;
+}
+
+.stat-item {
+    display: flex;
+    text-align: center;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    background-color: #3C3C3C;
+    width: 110px;
+    height: auto;
+    color: #CCCCCC;
+    padding: 20px;
+    margin: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+    
+}
+}

@@ -1,28 +1,40 @@
 (function () {
     const $ = q => document.querySelector(q);
 
-    function renderGarage() {
-        const garage = getFromLocalStorage('garage');
+    async function renderGarage() {
         const garageTable = $('#garage');
         const totalSpots = 12;
         let occupiedSpots = 0;
 
+        // Limpa a tabela
         garageTable.innerHTML = '';
 
-        let vaga = 1;
+        // Faz a requisição para a API para obter os veículos
+        try {
+            const response = await fetch('http://localhost:3000/api/vehicle');
+            const garage = await response.json(); // Assume que a resposta é um array de veículos
+            let vaga = 1;
 
-        garage.forEach(c => {
-            addCarToGarage(c, garageTable, vaga);
-            vaga++;
-            occupiedSpots++;
-        });
+            // Preenche as vagas com os carros da garagem
+            garage.forEach(c => {
+                addCarToGarage(c, garageTable, vaga);
+                vaga++;
+                occupiedSpots++;
+            });
 
-        for (let i = vaga; i <= totalSpots; i++) {
-            addCarToGarage(null, garageTable, i);
+            // Preenche as vagas restantes com "Disponível"
+            for (let i = vaga; i <= totalSpots; i++) {
+                addCarToGarage(null, garageTable, i);
+            }
+
+            // Atualizar as estatísticas
+            updateStatistics(totalSpots, totalSpots - occupiedSpots, occupiedSpots);
+
+        } catch (err) {
+            console.error('Erro ao buscar os veículos:', err);
+            // Caso haja erro, você pode mostrar uma mensagem de erro na tela
+            showAlert("Erro ao carregar os veículos. Tente novamente.");
         }
-
-        // Atualizar as estatísticas
-        updateStatistics(totalSpots, totalSpots - occupiedSpots, occupiedSpots);
     }
 
     function updateStatistics(total, available, occupied) {
@@ -71,9 +83,6 @@
                 <p>Placa: ${car.licence}</p>
                 <p>Ano: ${car.year}</p>
                 <p>Tipo: ${car.type}</p>
-
-                
-                
             </div>
         `;
     
@@ -110,13 +119,13 @@
     
         $(".close-details").removeEventListener('click', handleCloseClick);
         $(".close-details").addEventListener('click', handleCloseClick);
+
+        
     
         function handleCloseClick() {
             modal.style.display = "none";
         }
     }
-    
-    
 
     function showEditModal(car) {
         const modal = $("#edit-modal");
@@ -125,29 +134,59 @@
         const yearInput = $("#edit-year");
         const timeInput = $("#edit-time");
         const typeSelect = $("#edit-type");
-
+    
+        // Preenche os campos do formulário com os dados atuais do veículo
         nameInput.value = car.name;
         licenceInput.value = car.licence;
         yearInput.value = car.year;
         timeInput.value = car.time;
         typeSelect.value = car.type;
-
+    
         modal.style.display = "block";
-
-        $("#edit-form").onsubmit = (e) => {
+    
+        // Ao submeter o formulário de edição
+        $("#edit-form").onsubmit = async (e) => {
             e.preventDefault();
+    
+            // Atualiza os dados do veículo localmente
             car.name = nameInput.value;
             car.licence = licenceInput.value;
             car.year = yearInput.value;
             car.time = timeInput.value;
             car.type = typeSelect.value;
-
-            updateCarInStorage(car);
-            renderGarage();
-            modal.style.display = "none";
-            showAlert("Alterações salvas com sucesso.");
+    
+            try {
+                // Envia a atualização do veículo para o servidor
+                const response = await fetch('http://localhost:3000/api/vehicle', {
+                    method: 'PUT',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({
+                        name: car.name,
+                        licence: car.licence,
+                        year: car.year,
+                        time: car.time,
+                        type: car.type,
+                    }),
+                });
+    
+                if (response.ok) {
+                    // Atualiza a garagem e fecha o modal se a atualização for bem-sucedida
+                    renderGarage();
+                    modal.style.display = "none";
+                    showAlert("Alterações salvas com sucesso.");
+                } else {
+                    const errorData = await response.json();
+                    showAlert(`Erro ao atualizar veículo: ${errorData.error}`);
+                }
+            } catch (err) {
+                console.error("Erro ao atualizar veículo:", err);
+                showAlert("Erro ao atualizar veículo. Tente novamente.");
+            }
         };
     }
+    
 
     function checkOut(car, exitTime) {
         const period = convertPeriod(car.time, exitTime);

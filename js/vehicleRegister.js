@@ -23,7 +23,27 @@
         return JSON.parse(localStorage.getItem(key)) || [];
     }
 
-    $("#add").addEventListener("click", () => {
+    async function saveVehicleToServer(vehicle) {
+        try {
+            const response = await fetch('http://localhost:3000/api/vehicle', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(vehicle)
+            });
+            if (!response.ok) {
+                throw new Error('Erro ao salvar veículo no servidor');
+            }
+            const data = await response.json();
+            console.log('Veículo salvo:', data);
+        } catch (error) {
+            console.error('Erro na solicitação:', error);
+            showAlert('Erro ao salvar veículo no servidor.');
+        }
+    }
+
+    $("#add").addEventListener("click", async () => {
         const garage = getFromLocalStorage('garage');
     
         // Verifica se o número de veículos já atingiu o limite máximo
@@ -47,6 +67,7 @@
         garage.push(vehicle);
         saveToLocalStorage('garage', garage);
         addVehicleToResult(vehicle);
+        await saveVehicleToServer(vehicle);
     
         // Limpar os campos após adicionar o veículo
         $("#name").value = "";
